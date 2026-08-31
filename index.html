@@ -6,91 +6,116 @@
   <title>Pflegehilfe-Check | Hilfe zur Pflege nach SGB XII</title>
   <meta name="description" content="Wissenschaftlicher Demonstrator zur orientierenden Prüfung einer möglichen Hilfe zur Pflege nach SGB XII." />
   <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#20242a;--muted:#667085;--border:#e4e7ec;--accent:#6c4df6;--good:#137a4a;--warn:#a65f00;--bad:#b42318;--soft:#f0edff}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
-    .wrap{max-width:980px;margin:0 auto;padding:32px 18px 64px}.hero{background:linear-gradient(135deg,#251a5c,#6c4df6);color:white;padding:34px;border-radius:24px;box-shadow:0 18px 50px rgba(38,23,92,.18)}
-    .hero h1{margin:0 0 8px;font-size:clamp(2rem,6vw,3.5rem);line-height:1.02}.hero p{max-width:760px;margin:8px 0 0;color:#eee9ff}.badge{display:inline-block;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.14);font-size:.9rem;margin-bottom:14px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(16,24,40,.05)}
-    .card h2,.card h3{margin-top:0}.full{grid-column:1/-1}.field{margin:14px 0}.field label{display:block;font-weight:700;margin-bottom:7px}.hint{font-size:.9rem;color:var(--muted);margin-top:4px}
-    input,select{width:100%;padding:12px 13px;border:1px solid #cfd4dc;border-radius:11px;background:white;font-size:1rem} input:focus,select:focus{outline:3px solid #e7e1ff;border-color:var(--accent)}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.check{display:flex;align-items:flex-start;gap:10px;margin:10px 0}.check input{width:auto;margin-top:4px}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    button{border:0;border-radius:12px;padding:12px 16px;font-size:1rem;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:white}.secondary{background:#edf0f5;color:#344054}
-    .result{display:none}.result.show{display:block}.status{padding:18px;border-radius:14px;margin:12px 0}.green{background:#ecfdf3;border:1px solid #abefc6}.yellow{background:#fffaeb;border:1px solid #fedf89}.red{background:#fef3f2;border:1px solid #fecdca}
-    .money{font-size:2rem;font-weight:900;margin:4px 0}.calc{display:grid;grid-template-columns:1fr auto;gap:8px 18px;padding:14px;background:#f8fafc;border-radius:12px}.calc div:nth-child(even){font-weight:800;text-align:right}
-    .note{background:#f9fafb;border-left:4px solid var(--accent);padding:14px 16px;border-radius:8px;margin-top:14px}.sources a{color:#4b35c9;word-break:break-word}.footer{color:var(--muted);font-size:.9rem;margin-top:28px}
-    .lang{font-weight:500;color:#667085;font-size:.92rem}.privacy{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 16px;margin-top:18px}.pill{display:inline-block;background:var(--soft);color:#4b35c9;border-radius:999px;padding:5px 9px;font-size:.82rem;font-weight:800;margin-right:6px}
-    @media(max-width:760px){.grid,.row{grid-template-columns:1fr}.hero{padding:26px}.full{grid-column:auto}}
+    :root{--bg:#f6f7fb;--card:#fff;--text:#20242a;--muted:#667085;--border:#e4e7ec;--accent:#6c4df6;--soft:#f0edff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    .wrap{max-width:980px;margin:0 auto;padding:32px 18px 64px}
+    .hero{background:linear-gradient(135deg,#251a5c,#6c4df6);color:white;padding:34px;border-radius:24px;box-shadow:0 18px 50px rgba(38,23,92,.18)}
+    .hero h1{margin:0 0 8px;font-size:clamp(2rem,6vw,3.5rem);line-height:1.02}
+    .hero p{max-width:760px;margin:8px 0 0;color:#eee9ff}
+    .badge{display:inline-block;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.14);font-size:.9rem;margin-bottom:14px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(16,24,40,.05)}
+    .card h2,.card h3{margin-top:0}
+    .full{grid-column:1/-1}
+    .field{margin:14px 0}
+    .field label{display:block;font-weight:700;margin-bottom:7px}
+    .hint{font-size:.9rem;color:var(--muted);margin-top:4px}
+    input,select{width:100%;padding:12px 13px;border:1px solid #cfd4dc;border-radius:11px;background:white;font-size:1rem}
+    input:focus,select:focus{outline:3px solid #e7e1ff;border-color:var(--accent)}
+    .check{display:flex;align-items:flex-start;gap:10px;margin:10px 0}
+    .check input{width:auto;margin-top:4px}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    button{border:0;border-radius:12px;padding:12px 16px;font-size:1rem;font-weight:800;cursor:pointer}
+    .primary{background:var(--accent);color:white}
+    .secondary{background:#edf0f5;color:#344054}
+    .result{display:none}.result.show{display:block}
+    .status{padding:18px;border-radius:14px;margin:12px 0}
+    .green{background:#ecfdf3;border:1px solid #abefc6}
+    .yellow{background:#fffaeb;border:1px solid #fedf89}
+    .red{background:#fef3f2;border:1px solid #fecdca}
+    .calc{display:grid;grid-template-columns:1fr auto;gap:8px 18px;padding:14px;background:#f8fafc;border-radius:12px}
+    .calc div:nth-child(even){font-weight:800;text-align:right}
+    .note{background:#f9fafb;border-left:4px solid var(--accent);padding:14px 16px;border-radius:8px;margin-top:14px}
+    .sources a{color:#4b35c9;word-break:break-word}
+    .footer{color:var(--muted);font-size:.9rem;margin-top:28px}
+    .privacy{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 16px;margin-top:18px}
+    .pill{display:inline-block;background:var(--soft);color:#4b35c9;border-radius:999px;padding:5px 9px;font-size:.82rem;font-weight:800;margin-right:6px}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:26px}.full{grid-column:auto}}
     @media print{body{background:white}.hero,.btns,.privacy{display:none}.card{box-shadow:none}.result{display:block!important}}
   </style>
 </head>
 <body>
 <div class="wrap">
   <section class="hero">
-    <div class="badge">Wissenschaftlicher Demonstrator · 科研演示工具</div>
+    <div class="badge">Wissenschaftlicher Demonstrator</div>
     <h1>Pflegehilfe-Check</h1>
     <p>Orientierende Einschätzung, ob eine ergänzende <strong>Hilfe zur Pflege nach dem SGB XII</strong> in Betracht kommen könnte.</p>
-    <p class="lang">初步判断是否可能需要《德国社会法典》第十二编（SGB XII）中的“Hilfe zur Pflege（护理救助）”。</p>
   </section>
 
-  <div class="privacy"><strong>Datenschutz / 隐私：</strong> Die Eingaben werden nur lokal in diesem Browser verarbeitet und nicht gespeichert oder versendet. Bitte keine Namen, Geburtsdaten, Aktenzeichen oder andere identifizierende Daten realer Personen eingeben. / 输入内容仅在当前浏览器中处理，不会被上传或保存。请勿填写真实姓名、出生日期、案号等可识别个人身份的信息。</div>
+  <div class="privacy"><strong>Datenschutz:</strong> Die Eingaben werden nur lokal in diesem Browser verarbeitet und nicht gespeichert oder versendet. Bitte keine Namen, Geburtsdaten, Aktenzeichen oder andere identifizierende Daten realer Personen eingeben.</div>
 
   <div class="grid">
     <section class="card">
-      <h2>1. Pflegebedarf <span class="lang">护理需求</span></h2>
-      <div class="field"><label for="grad">Pflegegrad</label><select id="grad"><option value="0">Kein Pflegegrad / 无护理等级</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-      <div class="field"><label for="form">Pflegeform</label><select id="form"><option value="ambulant">Ambulant / 居家护理</option><option value="teilstationaer">Teilstationär / 日间或夜间护理</option><option value="stationaer">Vollstationär / 全住院护理</option></select></div>
-      <div class="check"><input id="under6" type="checkbox"><label for="under6">Pflegebedarf voraussichtlich unter 6 Monaten <span class="lang">预计护理需求少于6个月</span></label></div>
-      <div class="check"><input id="noInsurance" type="checkbox"><label for="noInsurance">Keine Pflegeversicherung vorhanden <span class="lang">没有护理保险</span></label></div>
+      <h2>1. Pflegebedarf</h2>
+      <div class="field">
+        <label for="grad">Pflegegrad</label>
+        <select id="grad"><option value="0">Kein Pflegegrad</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+      </div>
+      <div class="field">
+        <label for="form">Pflegeform</label>
+        <select id="form"><option value="ambulant">Ambulant</option><option value="teilstationaer">Teilstationär</option><option value="stationaer">Vollstationär</option></select>
+      </div>
+      <div class="check"><input id="under6" type="checkbox"><label for="under6">Pflegebedarf voraussichtlich unter 6 Monaten</label></div>
+      <div class="check"><input id="noInsurance" type="checkbox"><label for="noInsurance">Keine Pflegeversicherung vorhanden</label></div>
     </section>
 
     <section class="card">
-      <h2>2. Monatliche Kosten <span class="lang">每月费用</span></h2>
+      <h2>2. Monatliche Kosten</h2>
       <div class="field"><label for="cost">Notwendige Pflegekosten (€)</label><input id="cost" type="number" min="0" step="0.01" placeholder="z. B. 2100"></div>
       <div class="field"><label for="sgbxi">Leistung der Pflegeversicherung / SGB XI (€)</label><input id="sgbxi" type="number" min="0" step="0.01" placeholder="z. B. 1497"></div>
-      <div class="field"><label for="other">Andere vorrangige gleichartige Leistungen (€)</label><input id="other" type="number" min="0" step="0.01" placeholder="z. B. 0"><div class="hint">Zum Beispiel bereits bewilligte Leistungen anderer Träger. / 例如其他机构已经批准的同类给付。</div></div>
+      <div class="field"><label for="other">Andere vorrangige gleichartige Leistungen (€)</label><input id="other" type="number" min="0" step="0.01" placeholder="z. B. 0"><div class="hint">Zum Beispiel bereits bewilligte Leistungen anderer Träger.</div></div>
     </section>
 
     <section class="card">
-      <h2>3. Wirtschaftliche Situation <span class="lang">经济状况</span></h2>
+      <h2>3. Wirtschaftliche Situation</h2>
       <div class="field"><label for="income">Monatliches eigenes Einkommen (€)</label><input id="income" type="number" min="0" step="0.01" placeholder="z. B. Rente, Arbeitseinkommen"></div>
       <div class="field"><label for="assets">Verfügbares Vermögen / Bankguthaben (€)</label><input id="assets" type="number" min="0" step="0.01" placeholder="z. B. Sparguthaben"></div>
-      <div class="note"><strong>Wichtig:</strong> Dieses Tool zieht Einkommen oder Vermögen nicht automatisch als festen Eigenanteil ab. Schonvermögen, Absetzbeträge und Zumutbarkeit müssen individuell geprüft werden. <span class="lang">本工具不会把收入或存款简单地自动扣除，因为保护财产、扣除项目和可负担性都需要个案审核。</span></div>
+      <div class="note"><strong>Wichtig:</strong> Dieses Tool zieht Einkommen oder Vermögen nicht automatisch als festen Eigenanteil ab. Schonvermögen, Absetzbeträge und Zumutbarkeit müssen individuell geprüft werden.</div>
     </section>
 
     <section class="card">
-      <h2>4. Familie & weitere Prüfung <span class="lang">家庭与进一步审核</span></h2>
-      <div class="field"><label for="partner">Ehe-/Lebenspartner</label><select id="partner"><option value="none">Kein Partner / 无配偶或伴侣</option><option value="yes">Partner vorhanden / 有配偶或伴侣</option></select></div>
-      <div class="field"><label for="relatives">Unterhaltspflichtige Eltern oder Kinder</label><select id="relatives"><option value="none">Nein / 无</option><option value="under100">Ja, Jahresbrutto vermutlich nicht über 100.000 € / 有，年税前收入预计不超过10万欧</option><option value="over100">Ja, Jahresbrutto möglicherweise über 100.000 € / 有，年税前收入可能超过10万欧</option><option value="unknown">Unbekannt / 不清楚</option></select></div>
-      <div class="check"><input id="basic" type="checkbox"><label for="basic">Weitere Sozialleistungen vorhanden (z. B. Grundsicherung, Wohngeld) <span class="lang">已领取其他社会福利</span></label></div>
+      <h2>4. Familie & weitere Prüfung</h2>
+      <div class="field"><label for="partner">Ehe-/Lebenspartner</label><select id="partner"><option value="none">Kein Partner</option><option value="yes">Partner vorhanden</option></select></div>
+      <div class="field"><label for="relatives">Unterhaltspflichtige Eltern oder Kinder</label><select id="relatives"><option value="none">Nein</option><option value="under100">Ja, Jahresbrutto vermutlich nicht über 100.000 €</option><option value="over100">Ja, Jahresbrutto möglicherweise über 100.000 €</option><option value="unknown">Unbekannt</option></select></div>
+      <div class="check"><input id="basic" type="checkbox"><label for="basic">Weitere Sozialleistungen vorhanden (z. B. Grundsicherung, Wohngeld)</label></div>
     </section>
 
     <section class="card full">
-      <h2>5. Ergebnis berechnen <span class="lang">计算结果</span></h2>
+      <h2>5. Ergebnis berechnen</h2>
       <p>Der Check berechnet die <strong>reine Finanzierungslücke</strong> und gibt anschließend eine vorsichtige Orientierung zur weiteren Prüfung.</p>
-      <p class="lang">本工具先计算“尚未覆盖的护理费用缺口”，然后给出谨慎的后续申请建议。</p>
-      <div class="btns"><button class="primary" onclick="calculate()">Check starten / 开始评估</button><button class="secondary" onclick="resetForm()">Zurücksetzen / 重置</button><button class="secondary" onclick="window.print()">Ergebnis drucken / 打印结果</button></div>
+      <div class="btns"><button class="primary" onclick="calculate()">Check starten</button><button class="secondary" onclick="resetForm()">Zurücksetzen</button><button class="secondary" onclick="window.print()">Ergebnis drucken</button></div>
     </section>
 
     <section id="result" class="card full result" aria-live="polite">
-      <h2>Orientierungsergebnis <span class="lang">初步评估结果</span></h2>
+      <h2>Orientierungsergebnis</h2>
       <div id="status" class="status"></div>
       <div class="calc">
-        <div>Pflegekosten / 护理费用</div><div id="rCost">0 €</div>
-        <div>− SGB-XI-Leistungen / 护理保险给付</div><div id="rSgb">0 €</div>
-        <div>− andere vorrangige Leistungen / 其他优先给付</div><div id="rOther">0 €</div>
-        <div><strong>= rechnerische Deckungslücke / 计算后的资金缺口</strong></div><div id="rGap"><strong>0 €</strong></div>
+        <div>Pflegekosten</div><div id="rCost">0 €</div>
+        <div>− SGB-XI-Leistungen</div><div id="rSgb">0 €</div>
+        <div>− andere vorrangige Leistungen</div><div id="rOther">0 €</div>
+        <div><strong>= rechnerische Deckungslücke</strong></div><div id="rGap"><strong>0 €</strong></div>
       </div>
       <div id="details" class="note"></div>
     </section>
 
     <section class="card full">
-      <h2>Wie ist die Logik aufgebaut? <span class="lang">这个工具的逻辑是什么？</span></h2>
+      <h2>Wie ist die Logik aufgebaut?</h2>
       <p><span class="pill">1</span>Pflegebedarf feststellen → <span class="pill">2</span>vorrangige Leistungen berücksichtigen → <span class="pill">3</span>Deckungslücke bestimmen → <span class="pill">4</span>Einkommen/Vermögen und weitere Nachrangfragen individuell prüfen → <span class="pill">5</span>ggf. Hilfe zur Pflege beantragen.</p>
-      <p class="lang">确认护理需求 → 计算护理保险和其他优先给付 → 得出剩余资金缺口 → 个案审查收入、财产及其他后位性条件 → 必要时申请 Hilfe zur Pflege。</p>
     </section>
 
     <section class="card full sources">
-      <h2>Rechtliche Einordnung & Quellen <span class="lang">法律依据与来源</span></h2>
+      <h2>Rechtliche Einordnung & Quellen</h2>
       <p>Der Demonstrator orientiert sich an der Systematik der sozialen Pflegeversicherung (SGB XI) und der subsidiären Hilfe zur Pflege (SGB XII). Er bildet bewusst <strong>keine vollständige amtliche Anspruchsberechnung</strong> ab.</p>
       <ul>
         <li><a href="https://www.gesetze-im-internet.de/sgb_11/__4.html" target="_blank" rel="noopener">§ 4 SGB XI – Art und Umfang der Leistungen</a></li>
@@ -106,7 +131,7 @@
     </section>
   </div>
 
-  <p class="footer">Hinweis: Wissenschaftlicher Demonstrator für eine studentische Hausarbeit. Keine Rechtsberatung, kein Behördenbescheid und keine Garantie für einen Leistungsanspruch. / 提示：本页面为大学论文用途的学术演示工具，不构成法律咨询、行政决定或给付资格保证。</p>
+  <p class="footer">Hinweis: Wissenschaftlicher Demonstrator für eine studentische Hausarbeit. Keine Rechtsberatung, kein Behördenbescheid und keine Garantie für einen Leistungsanspruch.</p>
 </div>
 <script>
   const euro = v => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(Number(v)||0);
@@ -123,20 +148,20 @@
     const under6=document.getElementById('under6').checked, noIns=document.getElementById('noInsurance').checked;
     const partner=document.getElementById('partner').value, rel=document.getElementById('relatives').value;
     let cls='yellow', title='', text='';
-    if(cost<=0){cls='yellow';title='🟡 Angaben unvollständig / 信息不完整';text='Bitte tragen Sie mindestens die monatlich notwendigen Pflegekosten ein. / 请至少填写每月必要护理费用。';}
-    else if(gap<=0 && !under6 && !noIns){cls='red';title='🔴 Derzeit keine rechnerische Finanzierungslücke erkennbar / 目前未发现计算上的资金缺口';text='Die eingegebenen vorrangigen Leistungen decken die angegebenen Pflegekosten rechnerisch vollständig. Eine andere sozialrechtliche Prüfung kann trotzdem erforderlich sein. / 根据当前输入，优先给付已覆盖护理费用，但其他社会法问题仍可能需要单独审核。';}
-    else if(gap>0){cls='green';title='🟢 Prüfung auf Hilfe zur Pflege könnte sinnvoll sein / 建议进一步审核 Hilfe zur Pflege';text='Es besteht eine rechnerische monatliche Deckungslücke von '+euro(gap)+'. Ob und in welcher Höhe Hilfe zur Pflege tatsächlich gewährt wird, hängt insbesondere von Bedarf, Einkommen, Vermögen, Schonvermögen und vorrangigen Ansprüchen ab. / 目前计算出的每月资金缺口为 '+euro(gap)+'。最终是否获批及金额取决于护理需求、收入、财产、保护财产以及其他优先权利。';}
-    else {cls='yellow';title='🟡 Besondere Zugangssituation – weitere Prüfung empfohlen / 特殊准入情况，建议继续审核';text='Auch ohne rechnerische Finanzierungslücke kann bei fehlender Pflegeversicherung oder einem voraussichtlich unter sechs Monaten liegenden Pflegebedarf eine gesonderte Prüfung nach SGB XII sinnvoll sein. / 即使暂未计算出资金缺口，如果没有护理保险或预计护理需求少于6个月，也可能需要根据 SGB XII 进一步审核。';}
+    if(cost<=0){cls='yellow';title='🟡 Angaben unvollständig';text='Bitte tragen Sie mindestens die monatlich notwendigen Pflegekosten ein.';}
+    else if(gap<=0 && !under6 && !noIns){cls='red';title='🔴 Derzeit keine rechnerische Finanzierungslücke erkennbar';text='Die eingegebenen vorrangigen Leistungen decken die angegebenen Pflegekosten rechnerisch vollständig. Eine andere sozialrechtliche Prüfung kann trotzdem erforderlich sein.';}
+    else if(gap>0){cls='green';title='🟢 Prüfung auf Hilfe zur Pflege könnte sinnvoll sein';text='Es besteht eine rechnerische monatliche Deckungslücke von '+euro(gap)+'. Ob und in welcher Höhe Hilfe zur Pflege tatsächlich gewährt wird, hängt insbesondere von Bedarf, Einkommen, Vermögen, Schonvermögen und vorrangigen Ansprüchen ab.';}
+    else {cls='yellow';title='🟡 Besondere Zugangssituation – weitere Prüfung empfohlen';text='Auch ohne rechnerische Finanzierungslücke kann bei fehlender Pflegeversicherung oder einem voraussichtlich unter sechs Monaten liegenden Pflegebedarf eine gesonderte Prüfung nach SGB XII sinnvoll sein.';}
     status.className='status '+cls; status.innerHTML='<strong>'+title+'</strong><br>'+text;
     const notes=[];
-    if(income>0) notes.push('Eigenes Einkommen ('+euro(income)+'/Monat) muss sozialhilferechtlich individuell geprüft werden. / 本人月收入需要按社会救助法个案审核。');
-    if(assets>0) notes.push('Vermögen ('+euro(assets)+') darf nicht pauschal als vollständiger Ausschluss gewertet werden; Schonvermögen und Verwertbarkeit sind zu prüfen. / 财产不能简单视为完全排除资格，需审核保护财产及可处分性。');
-    if(partner==='yes') notes.push('Bei Ehe-/Lebenspartnern ist eine gesonderte wirtschaftliche Prüfung erforderlich. / 有配偶或伴侣时需进行单独经济审查。');
-    if(rel==='over100') notes.push('Bei Eltern oder Kindern mit möglicherweise mehr als 100.000 € Jahresbrutto kann Unterhaltsrückgriff relevant werden. / 若父母或子女年税前收入可能超过10万欧，赡养追索问题可能相关。');
-    if(rel==='unknown') notes.push('Das Einkommen unterhaltspflichtiger Eltern/Kinder ist unklar und sollte bei der Beratung geklärt werden. / 父母或子女收入情况不明，建议在咨询时进一步确认。');
-    if(under6) notes.push('Pflegebedarf unter sechs Monaten: Zugang nach SGB XI kann anders liegen; eine Prüfung nach SGB XII kann besonders relevant sein. / 护理需求少于6个月时，SGB XI 的准入可能不同，SGB XII 审核尤其重要。');
-    if(noIns) notes.push('Keine Pflegeversicherung: Eine Prüfung der Hilfe zur Pflege nach SGB XII kann besonders relevant sein. / 没有护理保险时，SGB XII 下的护理救助审核可能尤其重要。');
-    details.innerHTML='<strong>Weitere Prüfpunkte / 进一步审核事项：</strong><br>'+(notes.length?notes.map(n=>'• '+n).join('<br>'):'• Keine zusätzlichen Hinweise aus den Eingaben. / 当前输入没有触发额外提示。');
+    if(income>0) notes.push('Eigenes Einkommen ('+euro(income)+'/Monat) muss sozialhilferechtlich individuell geprüft werden.');
+    if(assets>0) notes.push('Vermögen ('+euro(assets)+') darf nicht pauschal als vollständiger Ausschluss gewertet werden; Schonvermögen und Verwertbarkeit sind zu prüfen.');
+    if(partner==='yes') notes.push('Bei Ehe-/Lebenspartnern ist eine gesonderte wirtschaftliche Prüfung erforderlich.');
+    if(rel==='over100') notes.push('Bei Eltern oder Kindern mit möglicherweise mehr als 100.000 € Jahresbrutto kann Unterhaltsrückgriff relevant werden.');
+    if(rel==='unknown') notes.push('Das Einkommen unterhaltspflichtiger Eltern/Kinder ist unklar und sollte bei der Beratung geklärt werden.');
+    if(under6) notes.push('Pflegebedarf unter sechs Monaten: Der Zugang nach SGB XI kann anders liegen; eine Prüfung nach SGB XII kann besonders relevant sein.');
+    if(noIns) notes.push('Keine Pflegeversicherung: Eine Prüfung der Hilfe zur Pflege nach SGB XII kann besonders relevant sein.');
+    details.innerHTML='<strong>Weitere Prüfpunkte:</strong><br>'+(notes.length?notes.map(n=>'• '+n).join('<br>'):'• Keine zusätzlichen Hinweise aus den Eingaben.');
     res.scrollIntoView({behavior:'smooth',block:'start'});
   }
   function resetForm(){document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox')i.checked=false;else i.value=''});document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);document.getElementById('result').classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});}

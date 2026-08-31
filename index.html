@@ -32,6 +32,7 @@
     button{border:0;border-radius:12px;padding:12px 16px;font-size:1rem;font-weight:800;cursor:pointer}
     .primary{background:var(--accent);color:white}
     .secondary{background:#edf0f5;color:#344054}
+    .example{background:#f0edff;color:#4b35c9}
     .result{display:none}.result.show{display:block}
     .status{padding:18px;border-radius:14px;margin:12px 0}
     .green{background:#ecfdf3;border:1px solid #abefc6}
@@ -108,7 +109,9 @@
     <section class="card full">
       <h2>5. Ergebnis berechnen</h2>
       <p>Der Check berechnet die <strong>rechnerische Finanzierungslücke</strong> und gibt anschließend eine vorsichtige Orientierung für die weitere Prüfung.</p>
+      <div class="note"><strong>Beispielmodus:</strong> Mit „Beispieldaten laden“ werden ausschließlich vollständig fiktive Daten eines virtuellen Klienten eingetragen. Es werden keine Daten einer realen Person verwendet.</div>
       <div class="btns">
+        <button class="example" onclick="loadExample()">Beispieldaten laden</button>
         <button class="primary" onclick="calculate()">Check starten</button>
         <button class="secondary" onclick="resetForm()">Zurücksetzen</button>
         <button class="secondary" onclick="window.print()">Ergebnis drucken</button>
@@ -155,6 +158,22 @@
 <script>
   const euro = v => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(Number(v)||0);
   function num(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
+
+  function loadExample(){
+    document.getElementById('grad').value='3';
+    document.getElementById('form').value='ambulant';
+    document.getElementById('under6').checked=false;
+    document.getElementById('noInsurance').checked=false;
+    document.getElementById('cost').value='1900';
+    document.getElementById('sgbxi').value='1150';
+    document.getElementById('other').value='0';
+    document.getElementById('income').value='980';
+    document.getElementById('assets').value='3500';
+    document.getElementById('partner').value='none';
+    document.getElementById('relatives').value='under100';
+    document.getElementById('basic').checked=false;
+    document.getElementById('result').classList.remove('show');
+  }
 
   function calculate(){
     const cost=num('cost');

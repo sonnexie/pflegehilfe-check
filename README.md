@@ -1,28 +1,44 @@
 # Pflegehilfe-Check
 
-Ein deutscher wissenschaftlicher Demonstrator zur orientierenden Prüfung, ob bei einem Pflegebedarf eine ergänzende **Hilfe zur Pflege nach dem SGB XII** in Betracht kommen könnte.
+Wissenschaftlicher Demonstrator zur orientierenden Vorprüfung, ob eine **Hilfe zur Pflege nach dem SGB XII** in Betracht kommen könnte.
 
-## Zweck
+## Was der Check berücksichtigt
 
-Der Check bildet vereinfacht folgende Logik ab:
+Der Prüfpfad bildet vereinfacht folgende Systematik ab:
 
-**Pflegebedarf → vorrangige Leistungen nach SGB XI → verbleibende Finanzierungslücke → wirtschaftliche Situation → mögliche subsidiäre Hilfe zur Pflege nach SGB XII**
+**Pflegebedarf → Pflegegrad / Zugang → vorrangige Leistungen → Finanzierungslücke → Einkommen → Ehe-/Lebenspartner → Vermögen → Eltern/Kinder → mögliche subsidiäre Hilfe zur Pflege**
 
-Der Rechner ist **kein amtlicher Leistungsrechner** und trifft **keine rechtsverbindliche Entscheidung**. Die konkrete Prüfung von Einkommen, Vermögen, Schonvermögen, Ehegatten-/Partnerkonstellationen und Leistungskonkurrenzen ist komplex und bleibt dem zuständigen Sozialhilfeträger vorbehalten.
+Berücksichtigt werden insbesondere:
+
+- SGB XI: Pflegeversicherung und Pflegegrad
+- SGB XII: §§ 2, 19 Abs. 3, 61 ff., 63b, 82–91 und 94
+- SGB V: mögliche häusliche Kranken-/Behandlungspflege
+- SGB VII: mögliche Pflegeleistungen der gesetzlichen Unfallversicherung
+- SGB IX: Schnittstellen zu Eingliederungshilfe / Persönlichem Budget
+- SGB XIV: mögliche Leistungen bei Pflegebedürftigkeit aus dem Sozialen Entschädigungsrecht
+- Einkommen und gesetzliche Abzüge
+- Einkommen und Vermögen eines nicht getrennt lebenden Ehe-/Lebenspartners
+- besondere Behandlung minderjähriger unverheirateter Antragsteller und ihrer Eltern
+- Unterhaltsrückgriff gegenüber Eltern und Kindern bei volljährigen Leistungsberechtigten, insbesondere § 94 Abs. 1a SGB XII
+- geschützte liquide Mittel und weitere Vermögensschutzpositionen nach § 90 SGB XII
+
+## Wichtiger methodischer Hinweis
+
+Der Check ist **kein amtlicher Leistungsrechner**. Der tatsächlich einzusetzende Einkommensanteil nach §§ 85–89 SGB XII und die Verwertbarkeit bzw. der Schutz einzelner Vermögenspositionen nach §§ 90–91 SGB XII erfordern eine Einzelfallprüfung. Deshalb trennt das Tool bewusst zwischen:
+
+1. rechnerischer Finanzierungslücke nach vorrangigen Leistungen,
+2. Einkommensprüfung,
+3. Vermögensprüfung und
+4. Angehörigen-/Sonderfragen.
+
+## Rechtsstand
+
+Stand des Demonstrators: **31.08.2026**. Für die vereinfachte §-85-Orientierung wird die Regelbedarfsstufe 1 von **563 €** für 2026 verwendet. Der allgemeine Barbetrag nach der Durchführungsverordnung zu § 90 Abs. 2 Nr. 9 SGB XII beträgt **10.000 € je einschlägiger volljähriger Person** sowie **500 € je überwiegend unterhaltener Person**.
 
 ## Datenschutz
 
-Die Anwendung läuft vollständig im Browser. Eingaben werden nicht an einen Server übertragen und nicht gespeichert. Für Demonstrationen sollten keine Namen, Geburtsdaten, Aktenzeichen oder andere identifizierende Daten realer Pflegebedürftiger eingegeben werden.
-
-## Quellenbasis
-
-- SGB XI, insbesondere § 4 und § 14 sowie die leistungsbezogenen Vorschriften
-- SGB XII, insbesondere § 2, § 19 Abs. 3, §§ 61 ff., § 63b und § 90
-- Bundesministerium für Gesundheit (BMG): Informationen zur Pflegeversicherung
-- Bundesministerium für Arbeit und Soziales (BMAS): Leistungen der Sozialhilfe – Hilfe zur Pflege
+Die Anwendung läuft vollständig im Browser. Eingaben werden weder übertragen noch gespeichert. Für Demonstrationen sollten ausschließlich fiktive oder anonymisierte Angaben verwendet werden.
 
 ## Nutzung in einer Hausarbeit
 
-Die Seite kann als digitaler Demonstrator oder ergänzendes Material verlinkt werden. Empfehlenswert ist die Einordnung als **Orientierungstool** und nicht als automatisierte Anspruchsentscheidung.
-
-Die Hauptseite liegt in `index.html` und ist für GitHub Pages vorbereitet.
+Die Seite ist als **digitaler wissenschaftlicher Demonstrator / Orientierungstool** gedacht und nicht als rechtsverbindliche Anspruchsentscheidung.

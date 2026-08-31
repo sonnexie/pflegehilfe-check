@@ -1,6 +1,6 @@
 # Pflegehilfe-Check
 
-Ein zweisprachiger (Deutsch / 中文) wissenschaftlicher Demonstrator zur orientierenden Prüfung, ob bei einem Pflegebedarf eine ergänzende **Hilfe zur Pflege nach dem SGB XII** in Betracht kommen könnte.
+Ein deutscher wissenschaftlicher Demonstrator zur orientierenden Prüfung, ob bei einem Pflegebedarf eine ergänzende **Hilfe zur Pflege nach dem SGB XII** in Betracht kommen könnte.
 
 ## Zweck
 

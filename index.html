@@ -1,10 +1,13 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Pflegehilfe-Check | Hilfe zur Pflege nach SGB XII</title>
-  <meta name="description" content="Wissenschaftlicher Demonstrator zur orientierenden Prüfung einer möglichen Hilfe zur Pflege nach SGB XII." />
+  <meta name="description" content="Wissenschaftlicher Demonstrator zur orientierenden Prüfung einer möglichen Hilfe zur Pflege nach SGB XII.">
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#20242a;--muted:#667085;--border:#e4e7ec;--accent:#6c4df6;--soft:#f0edff}
     *{box-sizing:border-box}
@@ -60,11 +63,22 @@
       <h2>1. Pflegebedarf</h2>
       <div class="field">
         <label for="grad">Pflegegrad</label>
-        <select id="grad"><option value="0">Kein Pflegegrad</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+        <select id="grad">
+          <option value="0">Kein Pflegegrad</option>
+          <option value="1">Pflegegrad 1</option>
+          <option value="2">Pflegegrad 2</option>
+          <option value="3">Pflegegrad 3</option>
+          <option value="4">Pflegegrad 4</option>
+          <option value="5">Pflegegrad 5</option>
+        </select>
       </div>
       <div class="field">
         <label for="form">Pflegeform</label>
-        <select id="form"><option value="ambulant">Ambulant</option><option value="teilstationaer">Teilstationär</option><option value="stationaer">Vollstationär</option></select>
+        <select id="form">
+          <option value="ambulant">Ambulant</option>
+          <option value="teilstationaer">Teilstationär</option>
+          <option value="stationaer">Vollstationär</option>
+        </select>
       </div>
       <div class="check"><input id="under6" type="checkbox"><label for="under6">Pflegebedarf voraussichtlich unter 6 Monaten</label></div>
       <div class="check"><input id="noInsurance" type="checkbox"><label for="noInsurance">Keine Pflegeversicherung vorhanden</label></div>
@@ -74,27 +88,31 @@
       <h2>2. Monatliche Kosten</h2>
       <div class="field"><label for="cost">Notwendige Pflegekosten (€)</label><input id="cost" type="number" min="0" step="0.01" placeholder="z. B. 2100"></div>
       <div class="field"><label for="sgbxi">Leistung der Pflegeversicherung / SGB XI (€)</label><input id="sgbxi" type="number" min="0" step="0.01" placeholder="z. B. 1497"></div>
-      <div class="field"><label for="other">Andere vorrangige gleichartige Leistungen (€)</label><input id="other" type="number" min="0" step="0.01" placeholder="z. B. 0"><div class="hint">Zum Beispiel bereits bewilligte Leistungen anderer Träger.</div></div>
+      <div class="field"><label for="other">Andere vorrangige gleichartige Leistungen (€)</label><input id="other" type="number" min="0" step="0.01" placeholder="z. B. 0"><div class="hint">Zum Beispiel bereits bewilligte Leistungen anderer Sozialleistungsträger.</div></div>
     </section>
 
     <section class="card">
       <h2>3. Wirtschaftliche Situation</h2>
-      <div class="field"><label for="income">Monatliches eigenes Einkommen (€)</label><input id="income" type="number" min="0" step="0.01" placeholder="z. B. Rente, Arbeitseinkommen"></div>
+      <div class="field"><label for="income">Monatliches eigenes Einkommen (€)</label><input id="income" type="number" min="0" step="0.01" placeholder="z. B. Rente oder Arbeitseinkommen"></div>
       <div class="field"><label for="assets">Verfügbares Vermögen / Bankguthaben (€)</label><input id="assets" type="number" min="0" step="0.01" placeholder="z. B. Sparguthaben"></div>
-      <div class="note"><strong>Wichtig:</strong> Dieses Tool zieht Einkommen oder Vermögen nicht automatisch als festen Eigenanteil ab. Schonvermögen, Absetzbeträge und Zumutbarkeit müssen individuell geprüft werden.</div>
+      <div class="note"><strong>Wichtig:</strong> Dieses Tool zieht Einkommen oder Vermögen nicht automatisch als festen Eigenanteil ab. Schonvermögen, Absetzbeträge, Verwertbarkeit und Zumutbarkeit müssen individuell geprüft werden.</div>
     </section>
 
     <section class="card">
-      <h2>4. Familie & weitere Prüfung</h2>
-      <div class="field"><label for="partner">Ehe-/Lebenspartner</label><select id="partner"><option value="none">Kein Partner</option><option value="yes">Partner vorhanden</option></select></div>
+      <h2>4. Familie und weitere Prüfung</h2>
+      <div class="field"><label for="partner">Ehe- oder Lebenspartner</label><select id="partner"><option value="none">Kein Partner</option><option value="yes">Partner vorhanden</option></select></div>
       <div class="field"><label for="relatives">Unterhaltspflichtige Eltern oder Kinder</label><select id="relatives"><option value="none">Nein</option><option value="under100">Ja, Jahresbrutto vermutlich nicht über 100.000 €</option><option value="over100">Ja, Jahresbrutto möglicherweise über 100.000 €</option><option value="unknown">Unbekannt</option></select></div>
-      <div class="check"><input id="basic" type="checkbox"><label for="basic">Weitere Sozialleistungen vorhanden (z. B. Grundsicherung, Wohngeld)</label></div>
+      <div class="check"><input id="basic" type="checkbox"><label for="basic">Weitere Sozialleistungen vorhanden, z. B. Grundsicherung oder Wohngeld</label></div>
     </section>
 
     <section class="card full">
       <h2>5. Ergebnis berechnen</h2>
-      <p>Der Check berechnet die <strong>reine Finanzierungslücke</strong> und gibt anschließend eine vorsichtige Orientierung zur weiteren Prüfung.</p>
-      <div class="btns"><button class="primary" onclick="calculate()">Check starten</button><button class="secondary" onclick="resetForm()">Zurücksetzen</button><button class="secondary" onclick="window.print()">Ergebnis drucken</button></div>
+      <p>Der Check berechnet die <strong>rechnerische Finanzierungslücke</strong> und gibt anschließend eine vorsichtige Orientierung für die weitere Prüfung.</p>
+      <div class="btns">
+        <button class="primary" onclick="calculate()">Check starten</button>
+        <button class="secondary" onclick="resetForm()">Zurücksetzen</button>
+        <button class="secondary" onclick="window.print()">Ergebnis drucken</button>
+      </div>
     </section>
 
     <section id="result" class="card full result" aria-live="polite">
@@ -111,12 +129,12 @@
 
     <section class="card full">
       <h2>Wie ist die Logik aufgebaut?</h2>
-      <p><span class="pill">1</span>Pflegebedarf feststellen → <span class="pill">2</span>vorrangige Leistungen berücksichtigen → <span class="pill">3</span>Deckungslücke bestimmen → <span class="pill">4</span>Einkommen/Vermögen und weitere Nachrangfragen individuell prüfen → <span class="pill">5</span>ggf. Hilfe zur Pflege beantragen.</p>
+      <p><span class="pill">1</span>Pflegebedarf feststellen → <span class="pill">2</span>vorrangige Leistungen berücksichtigen → <span class="pill">3</span>Deckungslücke bestimmen → <span class="pill">4</span>Einkommen, Vermögen und Nachrangfragen individuell prüfen → <span class="pill">5</span>gegebenenfalls Hilfe zur Pflege beantragen.</p>
     </section>
 
     <section class="card full sources">
-      <h2>Rechtliche Einordnung & Quellen</h2>
-      <p>Der Demonstrator orientiert sich an der Systematik der sozialen Pflegeversicherung (SGB XI) und der subsidiären Hilfe zur Pflege (SGB XII). Er bildet bewusst <strong>keine vollständige amtliche Anspruchsberechnung</strong> ab.</p>
+      <h2>Rechtliche Einordnung und Quellen</h2>
+      <p>Der Demonstrator orientiert sich an der Systematik der sozialen Pflegeversicherung nach SGB XI und der subsidiären Hilfe zur Pflege nach SGB XII. Er bildet bewusst <strong>keine vollständige amtliche Anspruchsberechnung</strong> ab.</p>
       <ul>
         <li><a href="https://www.gesetze-im-internet.de/sgb_11/__4.html" target="_blank" rel="noopener">§ 4 SGB XI – Art und Umfang der Leistungen</a></li>
         <li><a href="https://www.gesetze-im-internet.de/sgb_11/__14.html" target="_blank" rel="noopener">§ 14 SGB XI – Begriff der Pflegebedürftigkeit</a></li>
@@ -124,47 +142,87 @@
         <li><a href="https://www.gesetze-im-internet.de/sgb_12/__61.html" target="_blank" rel="noopener">§§ 61 ff. SGB XII – Hilfe zur Pflege</a></li>
         <li><a href="https://www.gesetze-im-internet.de/sgb_12/__63b.html" target="_blank" rel="noopener">§ 63b SGB XII – Verhältnis zu anderen Leistungen</a></li>
         <li><a href="https://www.gesetze-im-internet.de/sgb_12/__90.html" target="_blank" rel="noopener">§ 90 SGB XII – Einzusetzendes Vermögen</a></li>
-        <li><a href="https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung" target="_blank" rel="noopener">BMG – Pflegeversicherung</a></li>
-        <li><a href="https://www.bmas.de/DE/Soziales/Sozialhilfe/Leistungen-der-Sozialhilfe/leistungen-der-sozialhilfe-art.html" target="_blank" rel="noopener">BMAS – Leistungen der Sozialhilfe / Hilfe zur Pflege</a></li>
+        <li><a href="https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung" target="_blank" rel="noopener">Bundesministerium für Gesundheit – Pflegeversicherung</a></li>
+        <li><a href="https://www.bmas.de/DE/Soziales/Sozialhilfe/Leistungen-der-Sozialhilfe/leistungen-der-sozialhilfe-art.html" target="_blank" rel="noopener">Bundesministerium für Arbeit und Soziales – Hilfe zur Pflege</a></li>
       </ul>
-      <p class="hint">Quellenbasis des Demonstrators: Stand der für die Hausarbeit zusammengestellten Quellen vom 24.08.2026.</p>
+      <p class="hint">Quellenbasis des Demonstrators: Stand 24.08.2026.</p>
     </section>
   </div>
 
   <p class="footer">Hinweis: Wissenschaftlicher Demonstrator für eine studentische Hausarbeit. Keine Rechtsberatung, kein Behördenbescheid und keine Garantie für einen Leistungsanspruch.</p>
 </div>
+
 <script>
   const euro = v => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(Number(v)||0);
-  function num(id){return Math.max(0, Number(document.getElementById(id).value)||0)}
+  function num(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
+
   function calculate(){
-    const cost=num('cost'), sgb=num('sgbxi'), other=num('other'), income=num('income'), assets=num('assets');
+    const cost=num('cost');
+    const sgb=num('sgbxi');
+    const other=num('other');
+    const income=num('income');
+    const assets=num('assets');
     const gap=Math.max(0,cost-sgb-other);
+
     document.getElementById('rCost').textContent=euro(cost);
     document.getElementById('rSgb').textContent=euro(sgb);
     document.getElementById('rOther').textContent=euro(other);
     document.getElementById('rGap').innerHTML='<strong>'+euro(gap)+'</strong>';
-    const res=document.getElementById('result'), status=document.getElementById('status'), details=document.getElementById('details');
+
+    const res=document.getElementById('result');
+    const status=document.getElementById('status');
+    const details=document.getElementById('details');
+    const under6=document.getElementById('under6').checked;
+    const noIns=document.getElementById('noInsurance').checked;
+    const partner=document.getElementById('partner').value;
+    const rel=document.getElementById('relatives').value;
+
     res.classList.add('show');
-    const under6=document.getElementById('under6').checked, noIns=document.getElementById('noInsurance').checked;
-    const partner=document.getElementById('partner').value, rel=document.getElementById('relatives').value;
-    let cls='yellow', title='', text='';
-    if(cost<=0){cls='yellow';title='🟡 Angaben unvollständig';text='Bitte tragen Sie mindestens die monatlich notwendigen Pflegekosten ein.';}
-    else if(gap<=0 && !under6 && !noIns){cls='red';title='🔴 Derzeit keine rechnerische Finanzierungslücke erkennbar';text='Die eingegebenen vorrangigen Leistungen decken die angegebenen Pflegekosten rechnerisch vollständig. Eine andere sozialrechtliche Prüfung kann trotzdem erforderlich sein.';}
-    else if(gap>0){cls='green';title='🟢 Prüfung auf Hilfe zur Pflege könnte sinnvoll sein';text='Es besteht eine rechnerische monatliche Deckungslücke von '+euro(gap)+'. Ob und in welcher Höhe Hilfe zur Pflege tatsächlich gewährt wird, hängt insbesondere von Bedarf, Einkommen, Vermögen, Schonvermögen und vorrangigen Ansprüchen ab.';}
-    else {cls='yellow';title='🟡 Besondere Zugangssituation – weitere Prüfung empfohlen';text='Auch ohne rechnerische Finanzierungslücke kann bei fehlender Pflegeversicherung oder einem voraussichtlich unter sechs Monaten liegenden Pflegebedarf eine gesonderte Prüfung nach SGB XII sinnvoll sein.';}
-    status.className='status '+cls; status.innerHTML='<strong>'+title+'</strong><br>'+text;
+
+    let cls='yellow';
+    let title='';
+    let text='';
+
+    if(cost<=0){
+      cls='yellow';
+      title='🟡 Angaben unvollständig';
+      text='Bitte tragen Sie mindestens die monatlich notwendigen Pflegekosten ein.';
+    } else if(gap<=0 && !under6 && !noIns){
+      cls='red';
+      title='🔴 Derzeit keine rechnerische Finanzierungslücke erkennbar';
+      text='Die eingegebenen vorrangigen Leistungen decken die angegebenen Pflegekosten rechnerisch vollständig. Eine andere sozialrechtliche Prüfung kann trotzdem erforderlich sein.';
+    } else if(gap>0){
+      cls='green';
+      title='🟢 Prüfung auf Hilfe zur Pflege könnte sinnvoll sein';
+      text='Es besteht eine rechnerische monatliche Deckungslücke von '+euro(gap)+'. Ob und in welcher Höhe Hilfe zur Pflege tatsächlich gewährt wird, hängt insbesondere vom individuellen Bedarf, Einkommen, Vermögen, Schonvermögen und vorrangigen Ansprüchen ab.';
+    } else {
+      cls='yellow';
+      title='🟡 Besondere Zugangssituation – weitere Prüfung empfohlen';
+      text='Auch ohne rechnerische Finanzierungslücke kann bei fehlender Pflegeversicherung oder einem voraussichtlich unter sechs Monaten liegenden Pflegebedarf eine gesonderte Prüfung nach SGB XII sinnvoll sein.';
+    }
+
+    status.className='status '+cls;
+    status.innerHTML='<strong>'+title+'</strong><br>'+text;
+
     const notes=[];
-    if(income>0) notes.push('Eigenes Einkommen ('+euro(income)+'/Monat) muss sozialhilferechtlich individuell geprüft werden.');
-    if(assets>0) notes.push('Vermögen ('+euro(assets)+') darf nicht pauschal als vollständiger Ausschluss gewertet werden; Schonvermögen und Verwertbarkeit sind zu prüfen.');
-    if(partner==='yes') notes.push('Bei Ehe-/Lebenspartnern ist eine gesonderte wirtschaftliche Prüfung erforderlich.');
-    if(rel==='over100') notes.push('Bei Eltern oder Kindern mit möglicherweise mehr als 100.000 € Jahresbrutto kann Unterhaltsrückgriff relevant werden.');
-    if(rel==='unknown') notes.push('Das Einkommen unterhaltspflichtiger Eltern/Kinder ist unklar und sollte bei der Beratung geklärt werden.');
-    if(under6) notes.push('Pflegebedarf unter sechs Monaten: Der Zugang nach SGB XI kann anders liegen; eine Prüfung nach SGB XII kann besonders relevant sein.');
-    if(noIns) notes.push('Keine Pflegeversicherung: Eine Prüfung der Hilfe zur Pflege nach SGB XII kann besonders relevant sein.');
+    if(income>0) notes.push('Eigenes Einkommen von '+euro(income)+' pro Monat muss sozialhilferechtlich individuell geprüft werden.');
+    if(assets>0) notes.push('Vermögen von '+euro(assets)+' darf nicht pauschal als vollständiger Anspruchsausschluss gewertet werden; Schonvermögen und Verwertbarkeit sind zu prüfen.');
+    if(partner==='yes') notes.push('Bei Ehe- oder Lebenspartnern ist eine gesonderte wirtschaftliche Prüfung erforderlich.');
+    if(rel==='over100') notes.push('Bei Eltern oder Kindern mit möglicherweise mehr als 100.000 € Jahresbrutto kann ein Unterhaltsrückgriff relevant werden.');
+    if(rel==='unknown') notes.push('Das Einkommen unterhaltspflichtiger Eltern oder Kinder ist unklar und sollte bei der Beratung geklärt werden.');
+    if(under6) notes.push('Bei einem Pflegebedarf unter sechs Monaten kann eine gesonderte Prüfung nach SGB XII besonders relevant sein.');
+    if(noIns) notes.push('Bei fehlender Pflegeversicherung kann eine Prüfung der Hilfe zur Pflege nach SGB XII besonders relevant sein.');
+
     details.innerHTML='<strong>Weitere Prüfpunkte:</strong><br>'+(notes.length?notes.map(n=>'• '+n).join('<br>'):'• Keine zusätzlichen Hinweise aus den Eingaben.');
     res.scrollIntoView({behavior:'smooth',block:'start'});
   }
-  function resetForm(){document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox')i.checked=false;else i.value=''});document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);document.getElementById('result').classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});}
+
+  function resetForm(){
+    document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox') i.checked=false; else i.value='';});
+    document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
+    document.getElementById('result').classList.remove('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
 </script>
 </body>
 </html>

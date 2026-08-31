@@ -7,238 +7,378 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Pflegehilfe-Check | Hilfe zur Pflege nach SGB XII</title>
-  <meta name="description" content="Wissenschaftlicher Demonstrator zur orientierenden Prüfung einer möglichen Hilfe zur Pflege nach SGB XII.">
+  <meta name="description" content="Wissenschaftlicher Demonstrator zur orientierenden Prüfung einer möglichen Hilfe zur Pflege nach SGB XII unter Berücksichtigung von SGB XI, Einkommen, Vermögen, Ehepartnern, Eltern, Kindern und vorrangigen Leistungen.">
   <style>
-    :root{--bg:#f6f7fb;--card:#fff;--text:#20242a;--muted:#667085;--border:#e4e7ec;--accent:#6c4df6;--soft:#f0edff}
+    :root{--bg:#f6f7fb;--card:#fff;--text:#20242a;--muted:#667085;--border:#e4e7ec;--accent:#5b45d6;--soft:#f0edff;--green:#067647;--yellow:#b54708;--red:#b42318}
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
-    .wrap{max-width:980px;margin:0 auto;padding:32px 18px 64px}
-    .hero{background:linear-gradient(135deg,#251a5c,#6c4df6);color:white;padding:34px;border-radius:24px;box-shadow:0 18px 50px rgba(38,23,92,.18)}
+    .wrap{max-width:1080px;margin:0 auto;padding:32px 18px 64px}
+    .hero{background:linear-gradient(135deg,#251a5c,#654cf4);color:white;padding:34px;border-radius:24px;box-shadow:0 18px 50px rgba(38,23,92,.18)}
     .hero h1{margin:0 0 8px;font-size:clamp(2rem,6vw,3.5rem);line-height:1.02}
-    .hero p{max-width:760px;margin:8px 0 0;color:#eee9ff}
+    .hero p{max-width:850px;margin:8px 0 0;color:#eee9ff}
     .badge{display:inline-block;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.14);font-size:.9rem;margin-bottom:14px}
+    .privacy,.warning{border-radius:14px;padding:14px 16px;margin-top:18px}
+    .privacy{background:#fff7ed;border:1px solid #fed7aa}.warning{background:#fffaeb;border:1px solid #fedf89}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(16,24,40,.05)}
-    .card h2,.card h3{margin-top:0}
-    .full{grid-column:1/-1}
-    .field{margin:14px 0}
-    .field label{display:block;font-weight:700;margin-bottom:7px}
-    .hint{font-size:.9rem;color:var(--muted);margin-top:4px}
+    .card h2,.card h3{margin-top:0}.full{grid-column:1/-1}
+    .field{margin:14px 0}.field label{display:block;font-weight:700;margin-bottom:7px}.hint{font-size:.88rem;color:var(--muted);margin-top:5px}
     input,select{width:100%;padding:12px 13px;border:1px solid #cfd4dc;border-radius:11px;background:white;font-size:1rem}
     input:focus,select:focus{outline:3px solid #e7e1ff;border-color:var(--accent)}
-    .check{display:flex;align-items:flex-start;gap:10px;margin:10px 0}
-    .check input{width:auto;margin-top:4px}
+    .check{display:flex;align-items:flex-start;gap:10px;margin:10px 0}.check input{width:auto;margin-top:4px}
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    button{border:0;border-radius:12px;padding:12px 16px;font-size:1rem;font-weight:800;cursor:pointer}
-    .primary{background:var(--accent);color:white}
-    .secondary{background:#edf0f5;color:#344054}
-    .example{background:#f0edff;color:#4b35c9}
-    .result{display:none}.result.show{display:block}
-    .status{padding:18px;border-radius:14px;margin:12px 0}
-    .green{background:#ecfdf3;border:1px solid #abefc6}
-    .yellow{background:#fffaeb;border:1px solid #fedf89}
-    .red{background:#fef3f2;border:1px solid #fecdca}
-    .calc{display:grid;grid-template-columns:1fr auto;gap:8px 18px;padding:14px;background:#f8fafc;border-radius:12px}
-    .calc div:nth-child(even){font-weight:800;text-align:right}
-    .note{background:#f9fafb;border-left:4px solid var(--accent);padding:14px 16px;border-radius:8px;margin-top:14px}
-    .sources a{color:#4b35c9;word-break:break-word}
-    .footer{color:var(--muted);font-size:.9rem;margin-top:28px}
-    .privacy{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 16px;margin-top:18px}
-    .pill{display:inline-block;background:var(--soft);color:#4b35c9;border-radius:999px;padding:5px 9px;font-size:.82rem;font-weight:800;margin-right:6px}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:26px}.full{grid-column:auto}}
+    button{border:0;border-radius:12px;padding:12px 16px;font-size:1rem;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:white}.secondary{background:#edf0f5;color:#344054}.example{background:#f0edff;color:#4b35c9}
+    .result{display:none}.result.show{display:block}.status{padding:18px;border-radius:14px;margin:12px 0}.green{background:#ecfdf3;border:1px solid #abefc6}.yellow{background:#fffaeb;border:1px solid #fedf89}.red{background:#fef3f2;border:1px solid #fecdca}
+    .calc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px 18px;padding:16px;background:#f8fafc;border-radius:12px}.calc div:nth-child(even){font-weight:800;text-align:right}.calc .sep{grid-column:1/-1;border-top:1px solid #d0d5dd;margin:4px 0}
+    .note{background:#f9fafb;border-left:4px solid var(--accent);padding:14px 16px;border-radius:8px;margin-top:14px}.source-note{font-size:.9rem;color:var(--muted)}
+    .sources a{color:#4b35c9;word-break:break-word}.footer{color:var(--muted);font-size:.9rem;margin-top:28px}
+    .pill{display:inline-block;background:var(--soft);color:#4b35c9;border-radius:999px;padding:5px 9px;font-size:.82rem;font-weight:800;margin-right:6px}.kpi{font-size:1.6rem;font-weight:900}
+    details{border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-top:10px;background:#fff} summary{cursor:pointer;font-weight:800}
+    .legal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.legal-box{background:#f8fafc;border-radius:12px;padding:13px}.legal-box strong{display:block;margin-bottom:4px}
+    @media(max-width:820px){.grid,.legal-grid{grid-template-columns:1fr}.full{grid-column:auto}.hero{padding:26px}}
     @media print{body{background:white}.hero,.btns,.privacy{display:none}.card{box-shadow:none}.result{display:block!important}}
   </style>
 </head>
 <body>
 <div class="wrap">
   <section class="hero">
-    <div class="badge">Wissenschaftlicher Demonstrator</div>
+    <div class="badge">Wissenschaftlicher Demonstrator · Rechtsstand 31.08.2026</div>
     <h1>Pflegehilfe-Check</h1>
-    <p>Orientierende Einschätzung, ob eine ergänzende <strong>Hilfe zur Pflege nach dem SGB XII</strong> in Betracht kommen könnte.</p>
+    <p>Orientierende Vorprüfung, ob eine <strong>Hilfe zur Pflege nach dem SGB XII</strong> in Betracht kommen könnte. Der Check berücksichtigt Pflegebedarf, vorrangige Leistungen, Einkommen und Vermögen der leistungsberechtigten Person, nicht getrennt lebende Ehe- oder Lebenspartner sowie die besondere Behandlung von Eltern und Kindern.</p>
   </section>
 
-  <div class="privacy"><strong>Datenschutz:</strong> Die Eingaben werden nur lokal in diesem Browser verarbeitet und nicht gespeichert oder versendet. Bitte keine Namen, Geburtsdaten, Aktenzeichen oder andere identifizierende Daten realer Personen eingeben.</div>
+  <div class="privacy"><strong>Datenschutz:</strong> Alle Eingaben werden ausschließlich lokal im Browser verarbeitet. Es werden keine Daten gespeichert oder versendet. Bitte keine Namen, Geburtsdaten, Aktenzeichen oder andere identifizierende Daten realer Personen eingeben.</div>
+  <div class="warning"><strong>Wichtig:</strong> Dies ist kein amtlicher Leistungsrechner und keine Rechtsberatung. Das Tool kann die behördliche Einzelfallprüfung nach dem SGB XII nicht ersetzen. Insbesondere der tatsächlich einzusetzende Einkommensanteil nach §§ 85–89 SGB XII und die Verwertbarkeit von Vermögen nach §§ 90–91 SGB XII können nicht abschließend automatisiert werden.</div>
 
   <div class="grid">
     <section class="card">
-      <h2>1. Pflegebedarf</h2>
-      <div class="field">
-        <label for="grad">Pflegegrad</label>
-        <select id="grad">
-          <option value="0">Kein Pflegegrad</option>
-          <option value="1">Pflegegrad 1</option>
-          <option value="2">Pflegegrad 2</option>
-          <option value="3">Pflegegrad 3</option>
-          <option value="4">Pflegegrad 4</option>
-          <option value="5">Pflegegrad 5</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="form">Pflegeform</label>
-        <select id="form">
-          <option value="ambulant">Ambulant</option>
-          <option value="teilstationaer">Teilstationär</option>
-          <option value="stationaer">Vollstationär</option>
-        </select>
-      </div>
-      <div class="check"><input id="under6" type="checkbox"><label for="under6">Pflegebedarf voraussichtlich unter 6 Monaten</label></div>
-      <div class="check"><input id="noInsurance" type="checkbox"><label for="noInsurance">Keine Pflegeversicherung vorhanden</label></div>
+      <h2>1. Persönliche Ausgangslage</h2>
+      <div class="field"><label for="ageGroup">Alter / familienrechtliche Situation</label><select id="ageGroup"><option value="adult">Volljährig</option><option value="minor">Minderjährig und unverheiratet</option></select></div>
+      <div class="field"><label for="residence">Gewöhnlicher Aufenthalt</label><select id="residence"><option value="de">In Deutschland</option><option value="unclear">Unklar / Sonderfall</option><option value="abroad">Nicht in Deutschland</option></select><div class="hint">Bei ausländerrechtlichen Sonderkonstellationen oder Leistungsberechtigung nach dem AsylbLG ist eine gesonderte Prüfung erforderlich.</div></div>
+      <div class="field"><label for="partner">Nicht getrennt lebender Ehe- oder Lebenspartner</label><select id="partner"><option value="none">Nein</option><option value="yes">Ja</option><option value="separated">Getrennt lebend</option></select></div>
+      <div class="field"><label for="dependents">Weitere überwiegend unterhaltene Personen</label><input id="dependents" type="number" min="0" step="1" value="0"></div>
     </section>
 
     <section class="card">
-      <h2>2. Monatliche Kosten</h2>
-      <div class="field"><label for="cost">Notwendige Pflegekosten (€)</label><input id="cost" type="number" min="0" step="0.01" placeholder="z. B. 2100"></div>
-      <div class="field"><label for="sgbxi">Leistung der Pflegeversicherung / SGB XI (€)</label><input id="sgbxi" type="number" min="0" step="0.01" placeholder="z. B. 1497"></div>
-      <div class="field"><label for="other">Andere vorrangige gleichartige Leistungen (€)</label><input id="other" type="number" min="0" step="0.01" placeholder="z. B. 0"><div class="hint">Zum Beispiel bereits bewilligte Leistungen anderer Sozialleistungsträger.</div></div>
-    </section>
-
-    <section class="card">
-      <h2>3. Wirtschaftliche Situation</h2>
-      <div class="field"><label for="income">Monatliches eigenes Einkommen (€)</label><input id="income" type="number" min="0" step="0.01" placeholder="z. B. Rente oder Arbeitseinkommen"></div>
-      <div class="field"><label for="assets">Verfügbares Vermögen / Bankguthaben (€)</label><input id="assets" type="number" min="0" step="0.01" placeholder="z. B. Sparguthaben"></div>
-      <div class="note"><strong>Wichtig:</strong> Dieses Tool zieht Einkommen oder Vermögen nicht automatisch als festen Eigenanteil ab. Schonvermögen, Absetzbeträge, Verwertbarkeit und Zumutbarkeit müssen individuell geprüft werden.</div>
-    </section>
-
-    <section class="card">
-      <h2>4. Familie und weitere Prüfung</h2>
-      <div class="field"><label for="partner">Ehe- oder Lebenspartner</label><select id="partner"><option value="none">Kein Partner</option><option value="yes">Partner vorhanden</option></select></div>
-      <div class="field"><label for="relatives">Unterhaltspflichtige Eltern oder Kinder</label><select id="relatives"><option value="none">Nein</option><option value="under100">Ja, Jahresbrutto vermutlich nicht über 100.000 €</option><option value="over100">Ja, Jahresbrutto möglicherweise über 100.000 €</option><option value="unknown">Unbekannt</option></select></div>
-      <div class="check"><input id="basic" type="checkbox"><label for="basic">Weitere Sozialleistungen vorhanden, z. B. Grundsicherung oder Wohngeld</label></div>
+      <h2>2. Pflegebedarf</h2>
+      <div class="field"><label for="grad">Pflegegrad</label><select id="grad"><option value="0">Kein festgestellter Pflegegrad</option><option value="1">Pflegegrad 1</option><option value="2">Pflegegrad 2</option><option value="3">Pflegegrad 3</option><option value="4">Pflegegrad 4</option><option value="5">Pflegegrad 5</option></select></div>
+      <div class="field"><label for="form">Pflegeform</label><select id="form"><option value="ambulant">Ambulant / häuslich</option><option value="teilstationaer">Teilstationär</option><option value="kurzzeit">Kurzzeitpflege</option><option value="stationaer">Vollstationär</option></select></div>
+      <div class="field"><label for="duration">Voraussichtliche Dauer des Pflegebedarfs</label><select id="duration"><option value="over6">Mindestens 6 Monate</option><option value="under6">Unter 6 Monaten</option><option value="unknown">Unklar</option></select></div>
+      <div class="field"><label for="insurance">Pflegeversicherung vorhanden?</label><select id="insurance"><option value="yes">Ja</option><option value="no">Nein</option><option value="unknown">Unklar</option></select></div>
+      <div class="hint">SGB XI setzt grundsätzlich eine voraussichtliche Dauer von mindestens sechs Monaten voraus. Das SGB XII kann auch bei bestimmten kürzeren Pflegebedarfen relevant sein.</div>
     </section>
 
     <section class="card full">
-      <h2>5. Ergebnis berechnen</h2>
-      <p>Der Check berechnet die <strong>rechnerische Finanzierungslücke</strong> und gibt anschließend eine vorsichtige Orientierung für die weitere Prüfung.</p>
-      <div class="note"><strong>Beispielmodus:</strong> Mit „Beispieldaten laden“ werden ausschließlich vollständig fiktive Daten eines virtuellen Klienten eingetragen. Es werden keine Daten einer realen Person verwendet.</div>
-      <div class="btns">
-        <button class="example" onclick="loadExample()">Beispieldaten laden</button>
-        <button class="primary" onclick="calculate()">Check starten</button>
-        <button class="secondary" onclick="resetForm()">Zurücksetzen</button>
-        <button class="secondary" onclick="window.print()">Ergebnis drucken</button>
+      <h2>3. Notwendige Pflegekosten und vorrangige Leistungen</h2>
+      <div class="legal-grid">
+        <div class="field"><label for="cost">Notwendige Pflegekosten pro Monat (€)</label><input id="cost" type="number" min="0" step="0.01" placeholder="z. B. 1900"></div>
+        <div class="field"><label for="sgbxi">SGB XI – Pflegekasse (€)</label><input id="sgbxi" type="number" min="0" step="0.01" placeholder="z. B. Pflegesachleistung"></div>
+        <div class="field"><label for="sgbv">SGB V – häusliche Kranken-/Behandlungspflege (€)</label><input id="sgbv" type="number" min="0" step="0.01" value="0"></div>
+        <div class="field"><label for="sgbvii">SGB VII – gesetzliche Unfallversicherung / Pflege (€)</label><input id="sgbvii" type="number" min="0" step="0.01" value="0"></div>
+        <div class="field"><label for="sgbxiv">SGB XIV – Soziale Entschädigung / Pflege (€)</label><input id="sgbxiv" type="number" min="0" step="0.01" value="0"></div>
+        <div class="field"><label for="otherPriority">Sonstige gleichartige vorrangige Leistungen (€)</label><input id="otherPriority" type="number" min="0" step="0.01" value="0"></div>
       </div>
+      <div class="check"><input id="sgbix" type="checkbox"><label for="sgbix">Gleichzeitig Leistungen nach SGB IX / Eingliederungshilfe / Persönliches Budget relevant</label></div>
+      <div class="hint">§ 63b SGB XII verhindert Doppelleistungen, soweit gleichartige Leistungen nach anderen Rechtsvorschriften tatsächlich erbracht werden. Nicht jede Leistung eines anderen SGB ist automatisch gleichartig; deshalb ist die Einzelfallprüfung wichtig.</div>
+    </section>
+
+    <section class="card">
+      <h2>4. Einkommen der leistungsberechtigten Person</h2>
+      <div class="field"><label for="income">Monatliche Einkünfte (€)</label><input id="income" type="number" min="0" step="0.01" placeholder="z. B. Rente, Arbeitsentgelt"></div>
+      <div class="field"><label for="deductions">Vereinfachte Abzüge nach § 82 Abs. 2 SGB XII (€)</label><input id="deductions" type="number" min="0" step="0.01" value="0"><div class="hint">Zum Beispiel Steuern, Pflichtbeiträge zur Sozialversicherung, angemessene Versicherungsbeiträge und notwendige Ausgaben zur Einkommenserzielung. Sonderfreibeträge werden hier nicht vollständig abgebildet.</div></div>
+      <div class="field"><label for="housing">Angemessene monatliche Unterkunftskosten (€)</label><input id="housing" type="number" min="0" step="0.01" placeholder="z. B. 650"></div>
+      <div class="check"><input id="otherNeeds" type="checkbox"><label for="otherNeeds">Gleichzeitig weitere sozialhilferechtliche Bedarfe vorhanden</label></div>
+      <div class="hint">Für 2026 verwendet der Check die Regelbedarfsstufe 1 von 563 €. Daraus ergibt sich für § 85 SGB XII ein Grundbetrag von 1.126 €; der Familienzuschlag beträgt rechnerisch 395 € je berücksichtigter Person.</div>
+    </section>
+
+    <section class="card">
+      <h2>5. Ehe- oder Lebenspartner</h2>
+      <div class="field"><label for="partnerIncome">Monatliche Einkünfte des nicht getrennt lebenden Partners (€)</label><input id="partnerIncome" type="number" min="0" step="0.01" value="0"></div>
+      <div class="field"><label for="partnerDeductions">Abzüge des Partners nach § 82 Abs. 2 (€)</label><input id="partnerDeductions" type="number" min="0" step="0.01" value="0"></div>
+      <div class="field"><label for="partnerAssets">Liquides Vermögen / Bankguthaben des Partners (€)</label><input id="partnerAssets" type="number" min="0" step="0.01" value="0"></div>
+      <div class="note"><strong>Keine 100.000-€-Grenze für Ehepartner:</strong> Die besondere Jahresgrenze des § 94 Abs. 1a SGB XII betrifft Eltern und Kinder. Ein nicht getrennt lebender Ehe- oder Lebenspartner wird bereits bei der wirtschaftlichen Bedürftigkeitsprüfung nach § 19 Abs. 3 und § 61 SGB XII einbezogen.</div>
+    </section>
+
+    <section class="card">
+      <h2>6. Vermögen</h2>
+      <div class="field"><label for="assets">Eigenes liquides Vermögen / Bankguthaben (€)</label><input id="assets" type="number" min="0" step="0.01" placeholder="z. B. Girokonto, Sparguthaben"></div>
+      <div class="check"><input id="protectedHome" type="checkbox"><label for="protectedHome">Angemessenes selbst bewohntes Hausgrundstück vorhanden</label></div>
+      <div class="check"><input id="protectedCar" type="checkbox"><label for="protectedCar">Angemessenes Kraftfahrzeug vorhanden</label></div>
+      <div class="check"><input id="protectedPension" type="checkbox"><label for="protectedPension">Geschützte Altersvorsorge / sonstige besonders geschützte Vermögenspositionen vorhanden</label></div>
+      <div class="check"><input id="hardshipAsset" type="checkbox"><label for="hardshipAsset">Vermögen ist nicht kurzfristig verwertbar oder Verwertung könnte Härte bedeuten</label></div>
+      <div class="hint">Der allgemeine geschützte Barbetrag nach der Durchführungsverordnung zu § 90 Abs. 2 Nr. 9 beträgt derzeit 10.000 € je einschlägiger volljähriger Person sowie 500 € je überwiegend unterhaltener Person. Daneben bestehen weitere Schutztatbestände nach § 90 Abs. 2 und Härteregelungen.</div>
+    </section>
+
+    <section class="card">
+      <h2>7. Eltern bei minderjährigen Antragstellern</h2>
+      <div class="field"><label for="parentsTogether">Nur bei minderjährig und unverheiratet: Elternsituation</label><select id="parentsTogether"><option value="one">Ein Elternteil maßgeblich</option><option value="two">Eltern leben zusammen</option></select></div>
+      <div class="field"><label for="parentIncome">Monatliche Einkünfte der berücksichtigten Eltern (€)</label><input id="parentIncome" type="number" min="0" step="0.01" value="0"></div>
+      <div class="field"><label for="parentDeductions">Abzüge der Eltern nach § 82 Abs. 2 (€)</label><input id="parentDeductions" type="number" min="0" step="0.01" value="0"></div>
+      <div class="field"><label for="parentAssets">Liquides Vermögen der berücksichtigten Eltern (€)</label><input id="parentAssets" type="number" min="0" step="0.01" value="0"></div>
+      <div class="hint">Bei minderjährigen unverheirateten Leistungsberechtigten werden nach § 19 Abs. 3 und § 61 SGB XII grundsätzlich auch Einkommen und Vermögen der Eltern bzw. eines Elternteils berücksichtigt.</div>
+    </section>
+
+    <section class="card">
+      <h2>8. Eltern und Kinder bei volljährigen Antragstellern</h2>
+      <div class="field"><label for="relatives">Unterhaltspflichtige Eltern oder Kinder vorhanden?</label><select id="relatives"><option value="none">Nein</option><option value="under100">Ja, bei keiner Person Hinweise auf mehr als 100.000 € Jahresgesamteinkommen</option><option value="over100">Ja, mindestens eine Person möglicherweise über 100.000 € Jahresgesamteinkommen</option><option value="unknown">Ja, Einkommen unbekannt</option></select></div>
+      <div class="note"><strong>Wichtig:</strong> Bei volljährigen Leistungsberechtigten wird das Einkommen von Eltern oder Kindern nicht einfach dem Einkommen der pflegebedürftigen Person zugerechnet. § 94 Abs. 1a SGB XII betrifft vielmehr einen möglichen Unterhaltsrückgriff. Grundsätzlich werden Unterhaltsansprüche gegenüber Eltern oder Kindern erst berücksichtigt, wenn das jährliche Gesamteinkommen der jeweiligen unterhaltspflichtigen Person mehr als 100.000 € beträgt.</div>
+    </section>
+
+    <section class="card full">
+      <h2>9. Ergebnis berechnen</h2>
+      <p>Der Check zeigt getrennt: <strong>(1) Finanzierungslücke nach vorrangigen Leistungen, (2) Einkommensprüfung, (3) Vermögensprüfung und (4) Angehörigen-/Sonderfragen.</strong> Dadurch beeinflussen Einkommen, Bankguthaben und Partnersituation das Ergebnis, ohne eine rechtlich falsche Vollautomatik vorzutäuschen.</p>
+      <div class="note"><strong>Beispielmodus:</strong> „Beispieldaten laden“ verwendet ausschließlich vollständig fiktive Daten eines virtuellen Klienten.</div>
+      <div class="btns"><button class="example" onclick="loadExample()">Beispieldaten laden</button><button class="primary" onclick="calculate()">Check starten</button><button class="secondary" onclick="resetForm()">Zurücksetzen</button><button class="secondary" onclick="window.print()">Ergebnis drucken</button></div>
     </section>
 
     <section id="result" class="card full result" aria-live="polite">
       <h2>Orientierungsergebnis</h2>
       <div id="status" class="status"></div>
       <div class="calc">
-        <div>Pflegekosten</div><div id="rCost">0 €</div>
-        <div>− SGB-XI-Leistungen</div><div id="rSgb">0 €</div>
-        <div>− andere vorrangige Leistungen</div><div id="rOther">0 €</div>
-        <div><strong>= rechnerische Deckungslücke</strong></div><div id="rGap"><strong>0 €</strong></div>
+        <div>Notwendige Pflegekosten</div><div id="rCost">0 €</div>
+        <div>− SGB XI</div><div id="rXi">0 €</div>
+        <div>− SGB V</div><div id="rV">0 €</div>
+        <div>− SGB VII</div><div id="rVii">0 €</div>
+        <div>− SGB XIV</div><div id="rXiv">0 €</div>
+        <div>− sonstige gleichartige Leistungen</div><div id="rOther">0 €</div>
+        <div class="sep"></div>
+        <div><strong>Finanzierungslücke vor Eigenmitteln</strong></div><div id="rGap"><strong>0 €</strong></div>
+        <div class="sep"></div>
+        <div>Vereinfachtes zu berücksichtigendes Monatseinkommen</div><div id="rIncome">0 €</div>
+        <div>Orientierungs-Einkommensgrenze nach § 85 SGB XII</div><div id="rThreshold">0 €</div>
+        <div>Liquides Vermögen in der wirtschaftlichen Prüfung</div><div id="rAssets">0 €</div>
+        <div>Orientierungs-Schonbetrag für liquide Mittel</div><div id="rProtected">0 €</div>
       </div>
       <div id="details" class="note"></div>
+      <div id="nextSteps" class="note"></div>
     </section>
 
     <section class="card full">
-      <h2>Wie ist die Logik aufgebaut?</h2>
-      <p><span class="pill">1</span>Pflegebedarf feststellen → <span class="pill">2</span>vorrangige Leistungen berücksichtigen → <span class="pill">3</span>Deckungslücke bestimmen → <span class="pill">4</span>Einkommen, Vermögen und Nachrangfragen individuell prüfen → <span class="pill">5</span>gegebenenfalls Hilfe zur Pflege beantragen.</p>
+      <h2>Prüflogik</h2>
+      <p><span class="pill">1</span>Pflegebedürftigkeit / Pflegegrad → <span class="pill">2</span>SGB XI und andere vorrangige Ansprüche → <span class="pill">3</span>notwendige Deckungslücke → <span class="pill">4</span>Einkommensgrenze und zumutbarer Einkommenseinsatz → <span class="pill">5</span>verwertbares und geschütztes Vermögen → <span class="pill">6</span>Ehepartner / Eltern / Kinder → <span class="pill">7</span>ergänzende Hilfe zur Pflege.</p>
+      <div class="legal-grid">
+        <div class="legal-box"><strong>Pflegegrad 1</strong>Der Leistungsumfang der Hilfe zur Pflege ist nach § 63 Abs. 2 SGB XII enger als bei Pflegegrad 2–5.</div>
+        <div class="legal-box"><strong>Pflegegrad 2–5</strong>§ 63 Abs. 1 SGB XII nennt u. a. häusliche Pflege, Teil-/Kurzzeitpflege und stationäre Pflege.</div>
+        <div class="legal-box"><strong>Stationäre Pflege</strong>§ 88 SGB XII kann auch unterhalb der allgemeinen Einkommensgrenze einen angemessenen Einkommenseinsatz relevant machen.</div>
+        <div class="legal-box"><strong>Pflegegrad 4–5</strong>Nach § 87 Abs. 1 SGB XII ist mindestens 60 % des Einkommens über der Einkommensgrenze nicht einzusetzen; die genaue Zumutbarkeit bleibt Einzelfallfrage.</div>
+        <div class="legal-box"><strong>Nicht sofort verwertbares Vermögen</strong>§ 91 SGB XII sieht unter Voraussetzungen eine darlehensweise Leistung vor.</div>
+        <div class="legal-box"><strong>Mehrfacher Bedarf</strong>§ 89 SGB XII enthält Regeln, wenn Einkommen bereits für andere Bedarfe eingesetzt wird; bei parallelen SGB-IX-Bedarfen gelten Besonderheiten.</div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>Typische Unterlagen für die behördliche Prüfung</h2>
+      <p class="source-note">Die konkrete Anforderung hängt vom Einzelfall und vom zuständigen Sozialhilfeträger ab.</p>
+      <ul>
+        <li>Pflegegradbescheid / Gutachten bzw. Unterlagen zum Pflegebedarf</li>
+        <li>Kostenvoranschläge, Pflegevertrag oder Heimkostenaufstellung</li>
+        <li>Bescheide der Pflegekasse und anderer Leistungsträger</li>
+        <li>Einkommensnachweise, z. B. Rentenbescheid oder Lohnabrechnungen</li>
+        <li>Nachweise über Steuern, Sozialversicherungs- und angemessene Versicherungsbeiträge</li>
+        <li>Mietvertrag bzw. Nachweis angemessener Unterkunftskosten</li>
+        <li>Kontoauszüge und Vermögensnachweise der einzubeziehenden Personen</li>
+        <li>bei nicht getrennt lebenden Partnern entsprechende Einkommens- und Vermögensnachweise</li>
+        <li>bei begründeten Hinweisen auf die 100.000-€-Grenze ggf. Angaben zu unterhaltspflichtigen Eltern oder Kindern</li>
+      </ul>
     </section>
 
     <section class="card full sources">
-      <h2>Rechtliche Einordnung und Quellen</h2>
-      <p>Der Demonstrator orientiert sich an der Systematik der sozialen Pflegeversicherung nach SGB XI und der subsidiären Hilfe zur Pflege nach SGB XII. Er bildet bewusst <strong>keine vollständige amtliche Anspruchsberechnung</strong> ab.</p>
-      <ul>
-        <li><a href="https://www.gesetze-im-internet.de/sgb_11/__4.html" target="_blank" rel="noopener">§ 4 SGB XI – Art und Umfang der Leistungen</a></li>
-        <li><a href="https://www.gesetze-im-internet.de/sgb_11/__14.html" target="_blank" rel="noopener">§ 14 SGB XI – Begriff der Pflegebedürftigkeit</a></li>
+      <h2>Rechtliche Grundlagen und Quellen</h2>
+      <p>Der Demonstrator bildet schwerpunktmäßig das Zusammenspiel von SGB XI und SGB XII ab und berücksichtigt weitere mögliche vorrangige Pflege-/Krankenleistungen.</p>
+      <details open><summary>SGB XII – Hilfe zur Pflege und wirtschaftliche Bedürftigkeit</summary><ul>
         <li><a href="https://www.gesetze-im-internet.de/sgb_12/__2.html" target="_blank" rel="noopener">§ 2 SGB XII – Nachrang der Sozialhilfe</a></li>
-        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__61.html" target="_blank" rel="noopener">§§ 61 ff. SGB XII – Hilfe zur Pflege</a></li>
-        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__63b.html" target="_blank" rel="noopener">§ 63b SGB XII – Verhältnis zu anderen Leistungen</a></li>
-        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__90.html" target="_blank" rel="noopener">§ 90 SGB XII – Einzusetzendes Vermögen</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__19.html" target="_blank" rel="noopener">§ 19 Abs. 3 SGB XII – wirtschaftlich einzubeziehende Personen</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__61.html" target="_blank" rel="noopener">§ 61 SGB XII – Leistungsberechtigte</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__61a.html" target="_blank" rel="noopener">§ 61a SGB XII – Pflegebedürftigkeit</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__61b.html" target="_blank" rel="noopener">§ 61b SGB XII – Pflegegrade</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__63.html" target="_blank" rel="noopener">§ 63 SGB XII – Leistungen</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__63b.html" target="_blank" rel="noopener">§ 63b SGB XII – Leistungskonkurrenz</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__82.html" target="_blank" rel="noopener">§ 82 SGB XII – Einkommen</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__85.html" target="_blank" rel="noopener">§ 85 SGB XII – Einkommensgrenze</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__87.html" target="_blank" rel="noopener">§ 87 SGB XII – Einkommenseinsatz oberhalb der Grenze</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__88.html" target="_blank" rel="noopener">§ 88 SGB XII – Einkommenseinsatz unterhalb der Grenze</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__89.html" target="_blank" rel="noopener">§ 89 SGB XII – mehrfacher Bedarf</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__90.html" target="_blank" rel="noopener">§ 90 SGB XII – Vermögen / Schutzpositionen</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__91.html" target="_blank" rel="noopener">§ 91 SGB XII – Darlehen bei Vermögen</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_12/__94.html" target="_blank" rel="noopener">§ 94 SGB XII – Unterhaltsrückgriff / 100.000-€-Grenze</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/bshg_88abs2dv_1988/__1.html" target="_blank" rel="noopener">Durchführungsverordnung zu § 90 Abs. 2 Nr. 9 – Barbeträge</a></li>
+      </ul></details>
+      <details><summary>SGB XI und weitere vorrangige Systeme</summary><ul>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_11/__4.html" target="_blank" rel="noopener">§ 4 SGB XI – Art und Umfang der Leistungen</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_11/__14.html" target="_blank" rel="noopener">§ 14 SGB XI – Pflegebedürftigkeit</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_11/__15.html" target="_blank" rel="noopener">§ 15 SGB XI – Pflegegrade</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_5/__37.html" target="_blank" rel="noopener">§ 37 SGB V – häusliche Krankenpflege</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_7/__44.html" target="_blank" rel="noopener">§ 44 SGB VII – Pflege nach Versicherungsfall</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_9_2018/__29.html" target="_blank" rel="noopener">§ 29 SGB IX – Persönliches Budget</a></li>
+        <li><a href="https://www.gesetze-im-internet.de/sgb_14/__71.html" target="_blank" rel="noopener">§§ 71 ff. SGB XIV – Leistungen bei Pflegebedürftigkeit</a></li>
+      </ul></details>
+      <details><summary>Amtliche Informationen</summary><ul>
         <li><a href="https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung" target="_blank" rel="noopener">Bundesministerium für Gesundheit – Pflegeversicherung</a></li>
-        <li><a href="https://www.bmas.de/DE/Soziales/Sozialhilfe/Leistungen-der-Sozialhilfe/leistungen-der-sozialhilfe-art.html" target="_blank" rel="noopener">Bundesministerium für Arbeit und Soziales – Hilfe zur Pflege</a></li>
-      </ul>
-      <p class="hint">Quellenbasis des Demonstrators: Stand 24.08.2026.</p>
+        <li><a href="https://www.bmas.de/DE/Soziales/Sozialhilfe/Leistungen-der-Sozialhilfe/leistungen-der-sozialhilfe-art.html" target="_blank" rel="noopener">BMAS – Leistungen der Sozialhilfe / Hilfe zur Pflege</a></li>
+        <li><a href="https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Politik-fuer-Menschen-mit-Behinderungen/Fragen-und-Antworten-Angehoerigen-Entlastungsgesetz/faq-angehoerigen-entlastungsgesetz.html" target="_blank" rel="noopener">BMAS – Angehörigen-Entlastungsgesetz</a></li>
+      </ul></details>
+      <p class="hint">Rechtsstand des Demonstrators: 31.08.2026. Regelbedarfsstufe 1 im Jahr 2026: 563 €.</p>
     </section>
   </div>
-
-  <p class="footer">Hinweis: Wissenschaftlicher Demonstrator für eine studentische Hausarbeit. Keine Rechtsberatung, kein Behördenbescheid und keine Garantie für einen Leistungsanspruch.</p>
+  <p class="footer">Wissenschaftlicher Demonstrator für eine studentische Hausarbeit. Keine Rechtsberatung, kein Behördenbescheid und keine Garantie für einen Leistungsanspruch.</p>
 </div>
 
 <script>
-  const euro = v => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(Number(v)||0);
-  function num(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
+  const RBS1=563;
+  const BASE=RBS1*2;
+  const FAMILY=Math.ceil(RBS1*0.70);
+  const CASH_ADULT=10000;
+  const CASH_DEP=500;
+  const euro=v=>new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(Number(v)||0);
+  const num=id=>Math.max(0,Number(document.getElementById(id).value)||0);
+  const val=id=>document.getElementById(id).value;
+  const chk=id=>document.getElementById(id).checked;
 
   function loadExample(){
+    document.getElementById('ageGroup').value='adult';
+    document.getElementById('residence').value='de';
+    document.getElementById('partner').value='yes';
+    document.getElementById('dependents').value='0';
     document.getElementById('grad').value='3';
     document.getElementById('form').value='ambulant';
-    document.getElementById('under6').checked=false;
-    document.getElementById('noInsurance').checked=false;
-    document.getElementById('cost').value='1900';
+    document.getElementById('duration').value='over6';
+    document.getElementById('insurance').value='yes';
+    document.getElementById('cost').value='2200';
     document.getElementById('sgbxi').value='1150';
-    document.getElementById('other').value='0';
+    document.getElementById('sgbv').value='0';
+    document.getElementById('sgbvii').value='0';
+    document.getElementById('sgbxiv').value='0';
+    document.getElementById('otherPriority').value='0';
+    document.getElementById('sgbix').checked=false;
     document.getElementById('income').value='980';
-    document.getElementById('assets').value='3500';
-    document.getElementById('partner').value='none';
+    document.getElementById('deductions').value='80';
+    document.getElementById('housing').value='700';
+    document.getElementById('partnerIncome').value='900';
+    document.getElementById('partnerDeductions').value='70';
+    document.getElementById('assets').value='6500';
+    document.getElementById('partnerAssets').value='5000';
+    document.getElementById('protectedHome').checked=false;
+    document.getElementById('protectedCar').checked=false;
+    document.getElementById('protectedPension').checked=false;
+    document.getElementById('hardshipAsset').checked=false;
     document.getElementById('relatives').value='under100';
-    document.getElementById('basic').checked=false;
+    document.getElementById('otherNeeds').checked=false;
     document.getElementById('result').classList.remove('show');
   }
 
   function calculate(){
+    const adult=val('ageGroup')==='adult';
+    const spouse=adult && val('partner')==='yes';
+    const dependents=Math.floor(num('dependents'));
+    const grad=Number(val('grad'));
+    const form=val('form');
     const cost=num('cost');
-    const sgb=num('sgbxi');
-    const other=num('other');
-    const income=num('income');
-    const assets=num('assets');
-    const gap=Math.max(0,cost-sgb-other);
+    const xi=num('sgbxi'), v=num('sgbv'), vii=num('sgbvii'), xiv=num('sgbxiv'), other=num('otherPriority');
+    const priority=xi+v+vii+xiv+other;
+    const gap=Math.max(0,cost-priority);
 
-    document.getElementById('rCost').textContent=euro(cost);
-    document.getElementById('rSgb').textContent=euro(sgb);
-    document.getElementById('rOther').textContent=euro(other);
-    document.getElementById('rGap').innerHTML='<strong>'+euro(gap)+'</strong>';
-
-    const res=document.getElementById('result');
-    const status=document.getElementById('status');
-    const details=document.getElementById('details');
-    const under6=document.getElementById('under6').checked;
-    const noIns=document.getElementById('noInsurance').checked;
-    const partner=document.getElementById('partner').value;
-    const rel=document.getElementById('relatives').value;
-
-    res.classList.add('show');
-
-    let cls='yellow';
-    let title='';
-    let text='';
-
-    if(cost<=0){
-      cls='yellow';
-      title='🟡 Angaben unvollständig';
-      text='Bitte tragen Sie mindestens die monatlich notwendigen Pflegekosten ein.';
-    } else if(gap<=0 && !under6 && !noIns){
-      cls='red';
-      title='🔴 Derzeit keine rechnerische Finanzierungslücke erkennbar';
-      text='Die eingegebenen vorrangigen Leistungen decken die angegebenen Pflegekosten rechnerisch vollständig. Eine andere sozialrechtliche Prüfung kann trotzdem erforderlich sein.';
-    } else if(gap>0){
-      cls='green';
-      title='🟢 Prüfung auf Hilfe zur Pflege könnte sinnvoll sein';
-      text='Es besteht eine rechnerische monatliche Deckungslücke von '+euro(gap)+'. Ob und in welcher Höhe Hilfe zur Pflege tatsächlich gewährt wird, hängt insbesondere vom individuellen Bedarf, Einkommen, Vermögen, Schonvermögen und vorrangigen Ansprüchen ab.';
-    } else {
-      cls='yellow';
-      title='🟡 Besondere Zugangssituation – weitere Prüfung empfohlen';
-      text='Auch ohne rechnerische Finanzierungslücke kann bei fehlender Pflegeversicherung oder einem voraussichtlich unter sechs Monaten liegenden Pflegebedarf eine gesonderte Prüfung nach SGB XII sinnvoll sein.';
+    let relevantIncome=0, threshold=0, liquidAssets=0, protectedCash=0;
+    if(adult){
+      const ownNet=Math.max(0,num('income')-num('deductions'));
+      const partnerNet=spouse?Math.max(0,num('partnerIncome')-num('partnerDeductions')):0;
+      relevantIncome=ownNet+partnerNet;
+      threshold=BASE+num('housing')+FAMILY*((spouse?1:0)+dependents);
+      liquidAssets=num('assets')+(spouse?num('partnerAssets'):0);
+      protectedCash=CASH_ADULT*(1+(spouse?1:0))+CASH_DEP*dependents;
+    }else{
+      const parents=val('parentsTogether')==='two'?2:1;
+      const ownNet=Math.max(0,num('income')-num('deductions'));
+      const parentNet=Math.max(0,num('parentIncome')-num('parentDeductions'));
+      relevantIncome=ownNet+parentNet;
+      threshold=BASE+num('housing')+FAMILY*((parents===2?1:0)+1+dependents);
+      liquidAssets=num('assets')+num('parentAssets');
+      protectedCash=CASH_ADULT*parents+CASH_DEP*(1+dependents);
     }
 
-    status.className='status '+cls;
-    status.innerHTML='<strong>'+title+'</strong><br>'+text;
+    const incomeBelow=relevantIncome<=threshold;
+    const assetsBelow=liquidAssets<=protectedCash;
+    const station=form==='stationaer';
+    const specialAsset=chk('protectedHome')||chk('protectedCar')||chk('protectedPension')||chk('hardshipAsset');
+    const residenceOk=val('residence')==='de';
+    const duration=val('duration');
+    const insurance=val('insurance');
+    const relatives=val('relatives');
+
+    document.getElementById('rCost').textContent=euro(cost);
+    document.getElementById('rXi').textContent=euro(xi);
+    document.getElementById('rV').textContent=euro(v);
+    document.getElementById('rVii').textContent=euro(vii);
+    document.getElementById('rXiv').textContent=euro(xiv);
+    document.getElementById('rOther').textContent=euro(other);
+    document.getElementById('rGap').innerHTML='<strong>'+euro(gap)+'</strong>';
+    document.getElementById('rIncome').textContent=euro(relevantIncome);
+    document.getElementById('rThreshold').textContent=euro(threshold);
+    document.getElementById('rAssets').textContent=euro(liquidAssets);
+    document.getElementById('rProtected').textContent=euro(protectedCash);
 
     const notes=[];
-    if(income>0) notes.push('Eigenes Einkommen von '+euro(income)+' pro Monat muss sozialhilferechtlich individuell geprüft werden.');
-    if(assets>0) notes.push('Vermögen von '+euro(assets)+' darf nicht pauschal als vollständiger Anspruchsausschluss gewertet werden; Schonvermögen und Verwertbarkeit sind zu prüfen.');
-    if(partner==='yes') notes.push('Bei Ehe- oder Lebenspartnern ist eine gesonderte wirtschaftliche Prüfung erforderlich.');
-    if(rel==='over100') notes.push('Bei Eltern oder Kindern mit möglicherweise mehr als 100.000 € Jahresbrutto kann ein Unterhaltsrückgriff relevant werden.');
-    if(rel==='unknown') notes.push('Das Einkommen unterhaltspflichtiger Eltern oder Kinder ist unklar und sollte bei der Beratung geklärt werden.');
-    if(under6) notes.push('Bei einem Pflegebedarf unter sechs Monaten kann eine gesonderte Prüfung nach SGB XII besonders relevant sein.');
-    if(noIns) notes.push('Bei fehlender Pflegeversicherung kann eine Prüfung der Hilfe zur Pflege nach SGB XII besonders relevant sein.');
+    const blockers=[];
+    if(cost<=0) blockers.push('Die notwendigen Pflegekosten fehlen.');
+    if(!residenceOk) notes.push('Aufenthalt / ausländerrechtliche Leistungsberechtigung muss gesondert geprüft werden; dieser Check bildet § 23 SGB XII und das AsylbLG nicht vollständig ab.');
+    if(grad===0) notes.push('Es ist noch kein Pflegegrad festgestellt. Für Hilfe zur Pflege ist eine pflegefachliche Feststellung nach §§ 61a, 61b und 62 SGB XII erforderlich.');
+    if(grad===1) notes.push('Bei Pflegegrad 1 ist der Leistungsumfang nach § 63 Abs. 2 SGB XII eingeschränkt.');
+    if(duration==='under6') notes.push('Pflegebedarf unter sechs Monaten: Der Zugang nach SGB XI kann fehlen; eine Prüfung nach SGB XII kann gerade deshalb relevant sein.');
+    if(duration==='unknown') notes.push('Die voraussichtliche Dauer des Pflegebedarfs ist unklar.');
+    if(insurance==='no') notes.push('Keine Pflegeversicherung: SGB-XI-Leistungen stehen möglicherweise nicht zur Verfügung; Hilfe zur Pflege nach SGB XII kann dennoch in Betracht kommen.');
+    if(insurance==='unknown') notes.push('Der Versicherungsstatus sollte vor einer abschließenden Einschätzung geklärt werden.');
+    if(priority>cost && cost>0) notes.push('Die eingetragenen vorrangigen Leistungen übersteigen die angegebenen Pflegekosten; bitte Eingaben prüfen.');
+    if(chk('sgbix')) notes.push('SGB IX / Eingliederungshilfe ist gleichzeitig relevant. Leistungskonkurrenzen und § 89 SGB XII sollten individuell geprüft werden.');
+    if(chk('otherNeeds')) notes.push('Bei mehreren gleichzeitigen Bedarfen verhindert § 89 SGB XII eine doppelte Berücksichtigung desselben Einkommensanteils.');
 
-    details.innerHTML='<strong>Weitere Prüfpunkte:</strong><br>'+(notes.length?notes.map(n=>'• '+n).join('<br>'):'• Keine zusätzlichen Hinweise aus den Eingaben.');
-    res.scrollIntoView({behavior:'smooth',block:'start'});
+    if(incomeBelow){
+      notes.push('Das vereinfachte berücksichtigte Einkommen liegt nicht über der Orientierungs-Einkommensgrenze nach § 85 SGB XII.');
+      if(station) notes.push('Trotzdem kann bei längerem stationärem Aufenthalt nach § 88 SGB XII auch Einkommen unterhalb der Einkommensgrenze in angemessenem Umfang relevant werden.');
+    }else{
+      const excess=relevantIncome-threshold;
+      notes.push('Das vereinfachte Einkommen liegt um '+euro(excess)+' über der Orientierungs-Einkommensgrenze. Nach § 87 SGB XII kann ein angemessener Einkommenseinsatz verlangt werden; der genaue Betrag ist nicht automatisch der gesamte Überschuss.');
+      if(grad>=4) notes.push('Bei Pflegegrad 4 oder 5 ist nach § 87 Abs. 1 SGB XII ein Einsatz von mindestens 60 % des Einkommens über der Grenze nicht zuzumuten.');
+    }
+
+    if(assetsBelow){
+      notes.push('Die erfassten liquiden Mittel liegen innerhalb des rechnerischen allgemeinen Barbetrags. Weitere Vermögenspositionen können trotzdem geprüft werden.');
+    }else{
+      notes.push('Die liquiden Mittel liegen um '+euro(liquidAssets-protectedCash)+' über dem rechnerischen allgemeinen Barbetrag. Das bedeutet nicht automatisch „kein Anspruch“: Schutzpositionen, Verwertbarkeit, Härtefälle und ggf. § 91 SGB XII sind zu prüfen.');
+    }
+    if(specialAsset) notes.push('Es wurden mögliche besondere Vermögensschutz- oder Härtekonstellationen angegeben. Diese dürfen nicht wie frei verfügbares Bankguthaben behandelt werden.');
+
+    if(adult){
+      if(spouse) notes.push('Das Einkommen und Vermögen des nicht getrennt lebenden Ehe-/Lebenspartners wurde in die wirtschaftliche Vorprüfung einbezogen.');
+      if(relatives==='under100') notes.push('Eltern/Kinder unter 100.000 € Jahresgesamteinkommen werden bei einem volljährigen Antragsteller nicht einfach zum Haushaltseinkommen addiert; regelmäßig greift der besondere Schutz des § 94 Abs. 1a SGB XII.');
+      if(relatives==='over100') notes.push('Bei mindestens einem Elternteil oder Kind mit mehr als 100.000 € Jahresgesamteinkommen kann ein Unterhaltsrückgriff nach § 94 SGB XII relevant werden. Das schließt die Hilfe zur Pflege nicht automatisch aus.');
+      if(relatives==='unknown') notes.push('Bei Eltern/Kinder-Einkommen gilt zunächst die gesetzliche Vermutung, dass die 100.000-€-Grenze nicht überschritten wird; bei konkreten Anhaltspunkten kann der Träger weitere Angaben verlangen.');
+    }else{
+      notes.push('Bei minderjährig und unverheiratet wurden Einkommen und liquides Vermögen der berücksichtigten Eltern in die Vorprüfung einbezogen (§ 19 Abs. 3, § 61, § 85 Abs. 2 SGB XII).');
+    }
+
+    let cls='yellow', title='', text='';
+    if(blockers.length){
+      cls='yellow'; title='🟡 Angaben ergänzen'; text=blockers.join(' ');
+    }else if(gap<=0){
+      cls='red'; title='🔴 Keine rechnerische Finanzierungslücke nach vorrangigen Leistungen'; text='Die angegebenen vorrangigen Leistungen decken die angegebenen Pflegekosten vollständig. Für denselben gleichartigen Bedarf ist daher rechnerisch keine ergänzende Hilfe zur Pflege erkennbar.';
+    }else if(incomeBelow && assetsBelow && residenceOk && !station && grad>=2){
+      cls='green'; title='🟢 Antrag auf Hilfe zur Pflege erscheint prüfenswert'; text='Es verbleibt eine rechnerische Finanzierungslücke von '+euro(gap)+'. Das vereinfachte Einkommen liegt nicht über der §-85-Orientierungsgrenze und die erfassten liquiden Mittel liegen innerhalb des allgemeinen rechnerischen Barbetrags. Eine behördliche Einzelfallprüfung bleibt erforderlich.';
+    }else{
+      cls='yellow'; title='🟡 Möglicher Anspruch – wirtschaftliche Einzelfallprüfung entscheidend'; text='Es verbleibt eine rechnerische Finanzierungslücke von '+euro(gap)+'. Einkommen, Vermögen, Partner-/Elternkonstellation oder besondere Leistungsregeln können die Höhe eines möglichen Anspruchs vermindern oder beeinflussen.';
+    }
+
+    document.getElementById('status').className='status '+cls;
+    document.getElementById('status').innerHTML='<strong>'+title+'</strong><br>'+text;
+    document.getElementById('details').innerHTML='<strong>Prüfhinweise:</strong><br>'+notes.map(n=>'• '+n).join('<br>');
+    document.getElementById('nextSteps').innerHTML='<strong>Nächster Schritt:</strong><br>• Bescheide und Pflegekosten belegen<br>• Einkommen und gesetzliche Abzüge nachweisen<br>• Konto- und Vermögensnachweise der einzubeziehenden Personen vorlegen<br>• vorrangige Ansprüche gegenüber Pflegekasse, Krankenkasse, Unfallversicherung oder anderen Trägern klären<br>• verbleibenden notwendigen Pflegebedarf beim zuständigen Sozialhilfeträger prüfen lassen.';
+    document.getElementById('result').classList.add('show');
+    document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
   }
 
   function resetForm(){
-    document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox') i.checked=false; else i.value='';});
+    document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox')i.checked=false;else i.value='';});
     document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
+    document.getElementById('dependents').value='0';
+    ['sgbv','sgbvii','sgbxiv','otherPriority','deductions','partnerIncome','partnerDeductions','partnerAssets','parentIncome','parentDeductions','parentAssets'].forEach(id=>document.getElementById(id).value='0');
     document.getElementById('result').classList.remove('show');
     window.scrollTo({top:0,behavior:'smooth'});
   }
